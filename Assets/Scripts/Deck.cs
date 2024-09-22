@@ -10,7 +10,6 @@ public class Deck : MonoBehaviour
     [SerializeField] private CardPile playerDeck;
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Canvas cardCanvas;
-    //[SerializeField] private GameObject handArea;
 
     public List<Card> deckPile = new();
     public List<Card> discardPile = new();
@@ -41,7 +40,6 @@ public class Deck : MonoBehaviour
             card.setUp(playerDeck.cardsInPile[i]);
             card.gameObject.SetActive(false);
             deckPile.Add(card);
-            //card.transform.SetParent(handArea.transform, false);
         }
         Shuffle();
 
@@ -58,7 +56,7 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void TurnStartDraw(int value = 5)
+    public void TurnStartDraw(int value = 4)
     {
         for(int i = 0; i < value; i++)
         {
