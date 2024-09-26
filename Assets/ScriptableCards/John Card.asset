@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: John Card
   m_EditorClassIdentifier: 
   <card_Name>k__BackingField: John Card
-  <left_Number>k__BackingField: 5
-  <right_Number>k__BackingField: 5
+  <front_Number>k__BackingField: 5
+  <back_Number>k__BackingField: 6
   <Image>k__BackingField: {fileID: 2747135728840698598, guid: aa6220043d251b84c9c622e76cf5e211, type: 3}
+  <front_Type>k__BackingField: 0
+  <back_Type>k__BackingField: 1

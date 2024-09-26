@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Roger Petukangan
   m_EditorClassIdentifier: 
   <card_Name>k__BackingField: Roger Jaksel
-  <left_Number>k__BackingField: 1
-  <right_Number>k__BackingField: 9
+  <front_Number>k__BackingField: 9
+  <back_Number>k__BackingField: 1
   <Image>k__BackingField: {fileID: 350564406773261644, guid: 1b8808d92ca5f004d98cfdad5ef8f7e7, type: 3}
+  <front_Type>k__BackingField: 0
+  <back_Type>k__BackingField: 1
