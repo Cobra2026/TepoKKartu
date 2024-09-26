@@ -5,7 +5,7 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     // Singleton (katanya)
-    public static Deck Instance { get; private set; }
+    // public static Deck Instance { get; private set; }
 
     [SerializeField] private CardPile playerDeck;
     [SerializeField] private Card cardPrefab;
@@ -14,22 +14,23 @@ public class Deck : MonoBehaviour
     public List<Card> deckPile = new();
     public List<Card> discardPile = new();
     public List<Card> handPile { get; private set; } = new();
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    [SerializeField] private int drawNumber;
+    // private void Awake()
+    // {
+    //     if(Instance == null)
+    //     {
+    //         Instance = this;
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
 
     private void Start()
     {
         InstantiateDeck(); // -> to instantiate deck at the start of a level
-        TurnStartDraw();
+        TurnStartDraw(drawNumber);
     }
 
     private void InstantiateDeck()
@@ -45,7 +46,7 @@ public class Deck : MonoBehaviour
 
     }
 
-    private void Shuffle()
+    public void Shuffle()
     {
         for(int i = deckPile.Count - 1; i > 0; i--)
         {
@@ -56,9 +57,9 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void TurnStartDraw(int value = 4)
+    public void TurnStartDraw(int drawNumber)
     {
-        for(int i = 0; i < value; i++)
+        for(int i = 0; i < drawNumber; i++)
         {
             if(deckPile.Count <= 0)
             {
