@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 599effd5c935d9442806d2d3ff5fec99
+guid: 0dc8db5d69e423545bc8be64a95d03c0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2136297236069658017
-    second: Feint_0
+      213: -7717450174661515925
+    second: New Project_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Feint_0
+      name: New Project_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 288
-        height: 265
+        width: 1280
+        height: 720
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1ada4928407a5ad10800000000000000
-      internalID: 2136297236069658017
+      spriteID: b65268774fb16e490800000000000000
+      internalID: -7717450174661515925
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Feint_0: 2136297236069658017
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Prey Upon_0: 4417559226839808859
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
