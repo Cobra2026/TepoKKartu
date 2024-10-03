@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    // Singleton (katanya)
     public static Deck Instance { get; private set; }
 
     [SerializeField] private CardPile playerDeck;
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Canvas cardCanvas;
+    private TurnSystem turnSystem;
 
     public List<Card> deckPile = new();
     public List<Card> discardPile = new();
@@ -28,8 +28,18 @@ public class Deck : MonoBehaviour
 
     private void Start()
     {
+        turnSystem = TurnSystem.Instance;
         InstantiateDeck(); // -> to instantiate deck at the start of a level
-        TurnStartDraw();
+        TurnStartDraw(3);
+    }
+
+    private void Update()
+    {
+        if(turnSystem.turnStart)
+        {
+            TurnStartDraw(1);
+            turnSystem.turnStart = false;
+        }
     }
 
     private void InstantiateDeck()
@@ -56,21 +66,29 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void TurnStartDraw(int value = 4)
+    public void TurnStartDraw(int value)
     {
-        for(int i = 0; i < value; i++)
-        {
-            if(deckPile.Count <= 0)
+        
+            for (int i = 0; i < value; i++)
             {
-                discardPile = deckPile;
-                discardPile.Clear();
-                Shuffle();
-            }
-            handPile.Add(deckPile[0]);
-            deckPile[0].gameObject.SetActive(true);
-            deckPile.RemoveAt(0);
+                if (deckPile.Count == 0 && discardPile.Count != 0)
+                {
+                    deckPile.AddRange(discardPile);
+                    discardPile.Clear();
+                    Shuffle();
+                }
 
-        }
+                if (deckPile.Count > 0)
+                {
+                    Card drawnCard = deckPile[0];
+                    handPile.Add(drawnCard);
+                    drawnCard.transform.SetParent(GameObject.FindGameObjectWithTag("Hand").transform);
+                    deckPile[0].gameObject.SetActive(true);
+                    deckPile.RemoveAt(0);
+                }
+            }
+       
+
     }
 
     public void Discard(Card card)
@@ -80,6 +98,19 @@ public class Deck : MonoBehaviour
             handPile.Remove(card);
             discardPile.Add(card);
             card.gameObject.SetActive(false);   
+        }
+    }
+
+    public void AdditionalDraw()
+    {
+        if(TurnSystem.Instance.currentEnergy >= 1)
+        {
+            TurnStartDraw(1);
+            TurnSystem.Instance.currentEnergy -= 1;
+        }
+        else
+        {
+            Debug.Log("You dont have enough energy to draw");
         }
     }
 }

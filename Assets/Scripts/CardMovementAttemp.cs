@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Unity.UI;
 
-public class CardMovementAttemp : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    private bool isDragged;
+    //private bool isDragging = false;
     private bool proceedCaroutine;
-    private bool isFacingDown;
+    private bool isOverPlayArea = false;
+    public bool hasFlipped = false;
     private Canvas cardCanvas;
     private RectTransform rectTransform;
     private Card card;
     private GameObject Hand;
-    //private CardPosition cardPosition;
+    private CardUI cardUI;
+    private Vector2 startPosition;
+    private GameObject playArea;
+    private float random;
+    private bool isPointerOverCard = false;
+    private List<Card> cardsInPlay = new List<Card>();
 
     private readonly string CANVAS_TAG = "CardCanvas";
 
@@ -21,83 +28,197 @@ public class CardMovementAttemp : MonoBehaviour, IDragHandler, IBeginDragHandler
         cardCanvas = GameObject.FindGameObjectWithTag(CANVAS_TAG).GetComponent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
         card = GetComponent<Card>();
+        cardUI = GetComponent<CardUI>();
 
         Hand = GameObject.FindGameObjectWithTag("Hand");
         card.transform.SetParent(Hand.transform);
+        playArea = GameObject.FindGameObjectWithTag("PlayArea");
 
-        //cardPosition = CardPosition.Up; 
         proceedCaroutine = true;
-        isFacingDown = false;
-        
     }
 
-    private void OnMouseDown()
+  
+
+    private void Update()
     {
-        if (proceedCaroutine)
+        random = Random.Range(0f, 1f);
+
+        if (Input.GetMouseButtonDown(1) && isPointerOverCard && !isOverPlayArea)
         {
-            StartCoroutine(CardRotation());
+            if (proceedCaroutine)
+            {
+                StartCoroutine(CardRotation());
+            }
+        }
+
+        //for testing
+        if (TurnSystem.Instance.isMyTurn == false && isOverPlayArea)
+        {
+            Deck.Instance.Discard(card);
         }
     }
-
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(1))
-    //    {
-    //        if (proceedCaroutine)
-    //        {
-    //            StartCoroutine(CardRotation());
-    //        }
-    //    }
-    //}
 
     private IEnumerator CardRotation()
     {
         proceedCaroutine = false;
 
-        if(!isFacingDown)
+
+        if(card.cardPosition == CardPosition.Up)
         {
-            for(float i = 0f; i <= 180f; i += 10f)
+            for(float i = 0; i <= 180f; i += 10f)
             {
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
                 if(i == 90f)
                 {
-                    card.cardData.cardPosition = CardPosition.Up;
+                    card.cardPosition = CardPosition.Down;
+
                 }
                 yield return new WaitForSeconds(0.01f);
             }
+
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.cardName.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            cardUI.front_CardImage.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
-        else if(isFacingDown)
+        else if(card.cardPosition == CardPosition.Down)
         {
-            for(float i = 180f; i >= 0f; i -= 10f)
+            for(float i = 0; i <= 180f; i += 10f)
             {
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
                 if(i == 90f)
                 {
-                    card.cardData.cardPosition = CardPosition.Down;
+                    card.cardPosition = CardPosition.Up;
                 }
                 yield return new WaitForSeconds(0.01f);
             }
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.cardName.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.back_CardImage.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
+
 
         proceedCaroutine = true;
 
-        isFacingDown = !isFacingDown;
+
     }
+
+    private IEnumerator Flip()
+    {
+        proceedCaroutine = false;
+
+
+        if (random < 0.5f)
+        {
+            for (float i = 180f; i >= 0f; i -= 10f)
+            {
+                transform.rotation = Quaternion.Euler(0f, i, 0f);
+                if (i == 90f)
+                {
+                    card.cardPosition = CardPosition.Down;
+                    cardUI.backNumber.transform.rotation = Quaternion.Euler(0f, -i, 0f);
+                }
+                yield return new WaitForSeconds(0.01f);
+            }
+            //yield return new WaitForSeconds(1f);
+            //Deck.Instance.Discard(card);
+        }
+
+        else
+        {
+            for (float i = 180f; i >= 0f; i -= 10f)
+            {
+                transform.rotation = Quaternion.Euler(0f, i, 0f);
+                if (i == 90f)
+                {
+                    card.cardPosition = CardPosition.Up;
+                }
+                yield return new WaitForSeconds(0.01f);
+            }
+            //yield return new WaitForSeconds(1f);
+            //Deck.Instance.Discard(card);
+        }
+
+
+        proceedCaroutine = true;
+    }
+
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += (eventData.delta / cardCanvas.scaleFactor);
+        if (TurnSystem.Instance.isMyTurn)
+        {
+            rectTransform.anchoredPosition += (eventData.delta / cardCanvas.scaleFactor);
+            transform.SetParent(cardCanvas.transform, true);
+            Debug.Log("Dragging Card");
+        }
+
+
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isDragged = true;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        isDragged= false;
+        if (!isOverPlayArea)
+        {
+            transform.SetParent(Hand.transform, false);
+        }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        isPointerOverCard = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isPointerOverCard = false;
+    }
+
+    public void beginFlip()
+    {
+        if (isOverPlayArea)
+        {
+
+            if (proceedCaroutine)
+            {
+                StartCoroutine(Flip());
+                hasFlipped = true;
+            }
+        }
+        hasFlipped = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayArea"))
+        {
+            isOverPlayArea = true;
+            transform.SetParent(playArea.transform);
+
+            if(card != null)
+            {
+                cardsInPlay.Add(card);
+                Debug.Log("Card is added to list");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayArea"))
+        {
+            isOverPlayArea = false;
+
+            if (card != null)
+            {
+                cardsInPlay.Remove(card);
+                Debug.Log("Card is removed from list");
+            }
+        }
+    }
 
 }

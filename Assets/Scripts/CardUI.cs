@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CardUI : MonoBehaviour
 {
@@ -10,13 +11,14 @@ public class CardUI : MonoBehaviour
     //private CardPosition cardPosition;
 
     //[Header("Prefab elements")]
-    [SerializeField] private Image cardImage;
+    public Image front_CardImage;
+    public Image back_CardImage;
     [SerializeField] private Image cardBackground;
     [SerializeField] private Image cardTypeBackground;
 
-    [SerializeField] private TextMeshProUGUI cardName;
-    [SerializeField] private TextMeshProUGUI frontNumber;
-    [SerializeField] private TextMeshProUGUI backNumber;
+    public TextMeshProUGUI cardName;
+    public TextMeshProUGUI frontNumber;
+    public TextMeshProUGUI backNumber;
 
     [SerializeField] private Sprite attackBackground;
     [SerializeField] private Sprite defendBackground;
@@ -56,12 +58,22 @@ public class CardUI : MonoBehaviour
 
     private void SetCardImage()
     {
-        cardImage.sprite = card.cardData.Image;
-    }
+        if (card.cardPosition == CardPosition.Up)
+        {
+            front_CardImage.sprite = card.cardData.front_Image;
+        }
+
+        else if(card.cardPosition == CardPosition.Down)
+        {
+            back_CardImage.sprite = card.cardData.back_Image;
+        }
+    }      
+
+        
 
     private void SetTypeBackground()
     {
-        if (card.cardData.cardPosition == CardPosition.Up)
+        if (card.cardPosition == CardPosition.Up)
         {
             frontNumber.gameObject.SetActive(true);
             backNumber.gameObject.SetActive(false);
@@ -75,7 +87,7 @@ public class CardUI : MonoBehaviour
                     break;
             }
         }
-        else if (card.cardData.cardPosition == CardPosition.Down)
+        else if (card.cardPosition == CardPosition.Down)
         {
             frontNumber.gameObject.SetActive(false);
             backNumber.gameObject.SetActive(true);
@@ -91,16 +103,5 @@ public class CardUI : MonoBehaviour
         }
     }
 
-    //private void SetBackTypeBackground()
-    //{
-    //    switch (card.cardData.back_Type)
-    //    {
-    //        case CardType.Attack:
-    //            cardTypeBackground.sprite = attackBackground;
-    //            break;
-    //        case CardType.Defend:
-    //            cardTypeBackground.sprite = defendBackground;
-    //            break;
-    //    }
-    //}
+  
 }

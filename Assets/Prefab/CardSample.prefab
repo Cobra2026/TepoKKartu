@@ -11,11 +11,13 @@ GameObject:
   - component: {fileID: 436006322793993290}
   - component: {fileID: 7371628922502636509}
   - component: {fileID: 193511305136916404}
-  - component: {fileID: 1660054871373833749}
   - component: {fileID: 921839402876591617}
-  m_Layer: 5
-  m_Name: CardSampleFront
-  m_TagString: Untagged
+  - component: {fileID: 2257372680933809908}
+  - component: {fileID: -1732862406622575166}
+  - component: {fileID: -4328464079788363823}
+  m_Layer: 6
+  m_Name: CardSample
+  m_TagString: PlayingCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,8 +42,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -222.6, y: -131.3}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -216.25404, y: -124.11301}
+  m_SizeDelta: {x: 87.3081, y: 114.374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7371628922502636509
 MonoBehaviour:
@@ -55,7 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580f8642512d4334ab4b4c3c95a3670e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardImage: {fileID: 2063397604855713581}
+  front_CardImage: {fileID: 2063397604855713581}
+  back_CardImage: {fileID: 2063397604855713581}
   cardBackground: {fileID: 1119267173408177140}
   cardTypeBackground: {fileID: 5299525388753536268}
   cardName: {fileID: 6360519924846959878}
@@ -76,18 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <cardData>k__BackingField: {fileID: 11400000, guid: 1bde9c31c93fe8a49ac82e2b201978ac, type: 2}
---- !u!114 &1660054871373833749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1959388628649775361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4622e444b1c5884291530bd1539386d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  cardPosition: 0
 --- !u!61 &921839402876591617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -101,7 +93,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -122,7 +114,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.44556427, y: 0.3188076}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -132,8 +124,93 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 86.72545, y: 115.13382}
+  m_Size: {x: 87.3081, y: 114.374}
   m_EdgeRadius: 0
+--- !u!50 &2257372680933809908
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959388628649775361}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 3
+--- !u!114 &-1732862406622575166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959388628649775361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4622e444b1c5884291530bd1539386d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasFlipped: 0
+--- !u!114 &-4328464079788363823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959388628649775361}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 13
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -1732862406622575166}
+          m_TargetAssemblyTypeName: CardMovementAttemp, Assembly-CSharp
+          m_MethodName: beginDrag
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -1732862406622575166}
+          m_TargetAssemblyTypeName: CardMovementAttemp, Assembly-CSharp
+          m_MethodName: endDrag
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3464788481304663975
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2918266406270354400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -624,7 +701,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2145413705999753333, guid: f03c7d5cfefbd9b46bc3710a4a73547e, type: 3}
+  m_Sprite: {fileID: 2748574679792199433, guid: 98224143adc8fd74eb7f41707aa0f549, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -726,7 +803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3007364122888608760
 RectTransform:
   m_ObjectHideFlags: 0
