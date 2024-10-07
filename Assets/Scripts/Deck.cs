@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    // Singleton (katanya)
-    public static Deck Instance { get; private set; }
-=======
     //public static Deck Instance { get; private set; }
->>>>>>> Stashed changes
 
     [SerializeField] private CardPile currentDeck;
     [SerializeField] private Card cardPrefab;
@@ -19,31 +14,12 @@ public class Deck : MonoBehaviour
     public List<Card> deckPile = new();
     public List<Card> discardPile = new();
     public List<Card> handPile { get; private set; } = new();
-<<<<<<< Updated upstream
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        InstantiateDeck(); // -> to instantiate deck at the start of a level
-        TurnStartDraw();
-=======
 
     private void Start()
     {
         turnSystem = TurnSystem.Instance;
         //InstantiateDeck();
         //TurnStartDraw(3);
->>>>>>> Stashed changes
     }
 
     private void Update()
@@ -64,7 +40,7 @@ public class Deck : MonoBehaviour
 
     }
 
-    private void Shuffle()
+    public void Shuffle()
     {
         for(int i = deckPile.Count - 1; i > 0; i--)
         {
@@ -75,18 +51,10 @@ public class Deck : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
-    public void TurnStartDraw(int value = 4)
-    {
-        for(int i = 0; i < value; i++)
-        {
-            if(deckPile.Count <= 0)
-=======
     public void TurnStartDraw(int value)
     {
         
             for (int i = 0; i < value; i++)
->>>>>>> Stashed changes
             {
                 if (deckPile.Count == 0 && discardPile.Count != 0)
                 {

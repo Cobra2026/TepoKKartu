@@ -187,8 +187,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &210046277
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,7 +459,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512347113}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,8 +551,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &584801690
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +694,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3134210612139033626, guid: 672315f3af3efb04bb3285d9ab86d16b, type: 3}
   m_PrefabInstance: {fileID: 1830217542}
   m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &860295739
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,13 +792,10 @@ RectTransform:
   - {fileID: 1099665922}
   - {fileID: 2002528506}
   - {fileID: 6467827649693996631}
-<<<<<<< Updated upstream
-=======
   - {fileID: 811290321}
   - {fileID: 584801691}
   - {fileID: 1570270395}
   - {fileID: 1731137939}
->>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -838,8 +829,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7564228275022982941, guid: c3564e5b1d8ea7b4d8b39bf07abb5c48, type: 3}
   m_PrefabInstance: {fileID: 8365536261902483570}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1481585633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,7 +1325,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 672315f3af3efb04bb3285d9ab86d16b, type: 3}
->>>>>>> Stashed changes
 --- !u!1 &1960732223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,11 +1717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 336546892378412600, guid: d9586b9180352d34aaeb7da670e5464b, type: 3}
       propertyPath: m_SizeDelta.x
-<<<<<<< Updated upstream
-      value: 378
-=======
       value: 421.21
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 336546892378412600, guid: d9586b9180352d34aaeb7da670e5464b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1769,11 +1753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 336546892378412600, guid: d9586b9180352d34aaeb7da670e5464b, type: 3}
       propertyPath: m_AnchoredPosition.x
-<<<<<<< Updated upstream
-      value: -189
-=======
       value: -154.73
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 336546892378412600, guid: d9586b9180352d34aaeb7da670e5464b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1843,11 +1823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3624336094353372946, guid: c3564e5b1d8ea7b4d8b39bf07abb5c48, type: 3}
       propertyPath: m_SizeDelta.x
-<<<<<<< Updated upstream
-      value: 378
-=======
       value: 421.21
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 3624336094353372946, guid: c3564e5b1d8ea7b4d8b39bf07abb5c48, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1883,11 +1859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3624336094353372946, guid: c3564e5b1d8ea7b4d8b39bf07abb5c48, type: 3}
       propertyPath: m_AnchoredPosition.x
-<<<<<<< Updated upstream
-      value: -189
-=======
       value: -154.73
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 3624336094353372946, guid: c3564e5b1d8ea7b4d8b39bf07abb5c48, type: 3}
       propertyPath: m_AnchoredPosition.y
