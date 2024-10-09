@@ -46,11 +46,12 @@ public class SceneController : MonoBehaviour
 
         public void QuitGame()
     {
-        #if UNITY_EDITOR
-        Debug.Log("Game quit! This won't work in the editor.");
-        #else
+        Debug.Log("Game is quitting...");
 
         Application.Quit();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 
