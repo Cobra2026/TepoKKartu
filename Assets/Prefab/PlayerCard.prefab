@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4622e444b1c5884291530bd1539386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDeck: {fileID: 0}
-  enemyDeck: {fileID: 5019017355257017238, guid: b6de73867aa5b034eb784d35d2f1f93b, type: 3}
+  hasFlipped: 0
+  card: {fileID: 0}
 --- !u!114 &-4328464079788363823
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1ee46cbec42c0864b9a88dfbdfa0b5a1
+guid: c6ca363d2bf2978419faf59e6196a82d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9095589454964874890
-    second: Hod EP5 1-5_0
+      213: 5790222397785301031
+    second: ITSTHISONE_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hod EP5 1-5_0
+      name: ITSTHISONE_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 778
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8e58f53b660a3e70800000000000000
-      internalID: 9095589454964874890
+      spriteID: 720e086c7900b5050800000000000000
+      internalID: 5790222397785301031
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Hod EP5 1-5_0: 9095589454964874890
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
