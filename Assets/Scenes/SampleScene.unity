@@ -1172,8 +1172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealthText: {fileID: 1352253941}
-  maxHealth: 0
-  currentHealth: 0
+  playerMaxHealth: 50
+  playerCurrentHealth: 0
 --- !u!4 &1306460590
 Transform:
   m_ObjectHideFlags: 0
@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 1570270397}
   - component: {fileID: 1570270396}
   m_Layer: 5
-  m_Name: EndTurnButton
+  m_Name: End Turn Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1921,8 +1921,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cd5b7e7b66569448fe02e7af4cc8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
   enemyHealthText: {fileID: 2120084927}
+  enemyMaxHealth: 0
+  enemyCurrentHealth: 0
 --- !u!4 &1828443890
 Transform:
   m_ObjectHideFlags: 0
