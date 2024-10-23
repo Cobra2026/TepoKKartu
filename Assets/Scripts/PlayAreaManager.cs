@@ -3,55 +3,113 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class PlayAreaManager : MonoBehaviour
 {
+    public static PlayAreaManager Instance { get; private set; }
+
     [SerializeField] private GameObject flipButton;
+    [SerializeField] private GameObject playButton;
     public List<CardMovementAttemp> cardsInPlayArea = new List<CardMovementAttemp>();
+    public List<CardMovementAttemp> playerCardsInPlay = new List<CardMovementAttemp>();
+    
     private TurnSystem turn;
+    private Deck enemyDeck;
+
+    public bool hasPlayed = false;
+
+    //Card Holders
+    [SerializeField] Transform playerCardHolder;
+    [SerializeField] Transform enemyCardHolder;
+
+    private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
         turn = TurnSystem.Instance;
+        enemyDeck = TurnSystem.Instance.enemyDeck.GetComponent<Deck>();
 
+        //play button
+        playButton.SetActive(false);
+        playButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play";
+        playButton.GetComponent<Button>().onClick.AddListener(PlayAllCards);
+
+        //flip button
         flipButton.SetActive(false);
         flipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Flip";
         flipButton.GetComponent<Button>().onClick.AddListener(FlipAllCards);
     }
 
+    private void Update()
+    {
+        if(hasPlayed)
+        {
+            playButton.SetActive(false);
+            flipButton.SetActive(true);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("PlayingCard"))
+        if (collision.CompareTag("PlayingCard"))
         {
             CardMovementAttemp card = collision.GetComponent<CardMovementAttemp>();
-            if(card != null)
+            if (card != null)
             {
-                cardsInPlayArea.Add(card);
-
-                if(card.card.cardData.card_Ownership == CardOwnership.Player)
+                if (!card.hasFlipped)
                 {
-                    PlayEnemyCards();
+                    cardsInPlayArea.Add(card);
+                    Debug.Log("Card is added to play area: " + card.card.cardData.card_Name);
+
+                    if (card.card.cardData.card_Ownership == CardOwnership.Player)
+                    {
+                        playerCardsInPlay.Add(card);
+                    }
                 }
+             
             }
 
-            if(cardsInPlayArea.Count >= 1 )
+            if (cardsInPlayArea.Count >= 1 && !hasPlayed)
             {
-                flipButton.SetActive(true);
+                playButton.SetActive(true);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("PlayingCard"))
+        if (collision.CompareTag("PlayingCard"))
         {
             CardMovementAttemp card = collision.GetComponent<CardMovementAttemp>();
-            if(card != null)
+
+            if (card != null && !card.hasFlipped)
             {
+                
+                if (playerCardsInPlay.Count > 1 && card.card.hasUsedPlayEnergy == true)
+                {
+                    turn.currentEnergy += 2;
+                    card.card.hasUsedPlayEnergy = false;
+
+                    Debug.Log("Card is removed from play area: " + card.card.cardData.card_Name);
+                }
+
                 cardsInPlayArea.Remove(card);
+                playerCardsInPlay.Remove(card);
+
             }
 
-            if(cardsInPlayArea.Count == 0)
+            if (cardsInPlayArea.Count == 0)
             {
                 flipButton.SetActive(false);
             }
@@ -66,6 +124,7 @@ public class PlayAreaManager : MonoBehaviour
             {
                 card.beginFlip();
             }
+            
             turn.currentEnergy -= 1;
 
         }
@@ -75,9 +134,21 @@ public class PlayAreaManager : MonoBehaviour
         }
     }
 
-    private void PlayEnemyCards()
+    public void PlayAllCards()
     {
-        Deck enemyDeck = TurnSystem.Instance.enemyDeck.GetComponent<Deck>();
+        if (turn.isMyTurn && !hasPlayed)
+        {
+            foreach (CardMovementAttemp card in cardsInPlayArea)
+            {
+                card.beginFlip();
+            }
+            hasPlayed = true;
+            Debug.Log("Card(s) has been played");
+        }
+    }
+
+    public void PlayEnemyCards()
+    {
 
         if(enemyDeck != null)
         {
@@ -86,18 +157,14 @@ public class PlayAreaManager : MonoBehaviour
                 CardMovementAttemp enemyCardMovement = enemyCard.GetComponent<CardMovementAttemp>();
                 if(enemyCardMovement != null)
                 {
-                    enemyCard.transform.SetParent(GameObject.FindGameObjectWithTag("PlayArea").transform, false);
-                    enemyCard.transform.localPosition = new Vector2(0, 80);
-                    cardsInPlayArea.Add(enemyCardMovement);
+                    enemyCard.transform.SetParent(GameObject.FindGameObjectWithTag("EnemyCardHolder").transform, false);
+
                 }
             }
         }
     }
 
-    //Test
-    private IEnumerator WaitforStartTurn(int time)
-    {
-        yield return new WaitForSeconds(time);
-        turn.StartTurn();
-    }
+
+
+
 }

@@ -69,7 +69,6 @@ public class CardUI : MonoBehaviour
         }
     }      
 
-        
 
     private void SetTypeBackground()
     {

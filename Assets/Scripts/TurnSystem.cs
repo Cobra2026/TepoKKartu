@@ -6,16 +6,23 @@ using TMPro;
 public class TurnSystem : MonoBehaviour
 {
     public static TurnSystem Instance { get; private set; }
+
     public bool isMyTurn;
     public bool turnStart = false;
+
     public int maxEnergy = 3;
     public int currentEnergy;
     public int startEnergy;
     public int turnCount = 1;
+
     public Deck playerDeck;
     public Deck enemyDeck;
+    public TextMeshProUGUI playerDeckCountText;
+    public TextMeshProUGUI playerDiscardCountText;
+
     public TextMeshProUGUI energyText;
     public PlayAreaManager playArea;
+    public CombatManager combatManager;
 
     private void Awake()
     {
@@ -31,6 +38,8 @@ public class TurnSystem : MonoBehaviour
 
     private void Start()
     {
+        combatManager = CombatManager.Instance;
+
 
         PlayerMatchStart();
         EnemyMatchStart();
@@ -55,14 +64,22 @@ public class TurnSystem : MonoBehaviour
             Debug.Log("turn start");
         }
 
+        //texts
         energyText.text = currentEnergy + "/" + startEnergy;
+        playerDeckCountText.text = playerDeck.deckPile.Count.ToString();
+        playerDiscardCountText.text = playerDeck.discardPile.Count.ToString();
     }
 
     public void EndTurn()
     {
+        if(!playArea.hasPlayed)
+        {
+            StartCoroutine(ForcePlayCards(2));
+            //playArea.PlayAllCards();
+        }
+        combatManager.CalculateDamage();
         isMyTurn = false;
         EndTurnDiscard();
-        Debug.Log("Turn End");
         StartCoroutine(EnemyTurnSimulation(2));
     }
 
@@ -72,21 +89,19 @@ public class TurnSystem : MonoBehaviour
         turnStart = true;
         currentEnergy = startEnergy;
         turnCount += 1;
-        Debug.Log("Your Turn");
+        playArea.hasPlayed = false;
     }
 
     private void PlayerMatchStart()
     {
         playerDeck.InstantiateDeck();
         playerDeck.TurnStartDraw(3);
-        Debug.Log("Player draw");
     }
 
     private void EnemyMatchStart()
     {
         enemyDeck.InstantiateDeck();
         enemyDeck.TurnStartDraw(1);
-        Debug.Log("Enemy draw");
     }
     
     private void EndTurnDiscard()
@@ -110,25 +125,14 @@ public class TurnSystem : MonoBehaviour
             }
         }
         playArea.cardsInPlayArea.Clear();
+        playArea.playerCardsInPlay.Clear();
     }
 
-    //private void DiscardPlayerCards()
-    //{
-    //    foreach(CardMovementAttemp playerCard in playArea.playerCardsInPlayArea)
-    //    {
-    //        playerDeck.Discard(playerCard.card);
-    //    }
-    //    //playArea.playerCardsInPlayArea.Clear();
-    //}
-
-    //private void DiscardEnemyCards()
-    //{
-    //    foreach(CardMovementAttemp enemyCard in playArea.enemyCardsInPlayArea)
-    //    {
-    //        enemyDeck.Discard(enemyCard.card);
-    //    }
-    //    //playArea.enemyCardsInPlayArea.Clear();
-    //}
+    private IEnumerator ForcePlayCards(int time)
+    {
+        playArea.PlayAllCards();
+        yield return new WaitForSeconds(time);
+    }
 
     //for testing
     private IEnumerator EnemyTurnSimulation(int time)

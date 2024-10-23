@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2257372680933809908}
   - component: {fileID: -1732862406622575166}
   - component: {fileID: -4328464079788363823}
+  - component: {fileID: 6208081624691522924}
   m_Layer: 6
   m_Name: PlayerCard
   m_TagString: PlayingCard
@@ -165,8 +166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4622e444b1c5884291530bd1539386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDeck: {fileID: 0}
-  enemyDeck: {fileID: 5019017355257017238, guid: b6de73867aa5b034eb784d35d2f1f93b, type: 3}
+  newParent: {fileID: 0}
+  hasFlipped: 0
+  card: {fileID: 0}
+  cardImageComponent: {fileID: 2063397604855713581}
+  cardBackgroundComponent: {fileID: 1119267173408177140}
+  cardBorderComponent: {fileID: 5299525388753536268}
 --- !u!114 &-4328464079788363823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +217,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!222 &6208081624691522924
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959388628649775361}
+  m_CullTransparentMesh: 1
 --- !u!1 &3464788481304663975
 GameObject:
   m_ObjectHideFlags: 0

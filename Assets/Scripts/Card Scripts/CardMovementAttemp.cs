@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Unity.UI;
+using UnityEngine.UI;
 
 public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     //private bool isDragging = false;
+    [HideInInspector] public Transform newParent;
+
     private bool proceedCaroutine;
     private bool isOverPlayArea = false;
     public bool hasFlipped = false;
-    private bool isPlayerCard = false;
+    public bool isPlayerCard = false;
+
     private Canvas cardCanvas;
     private RectTransform rectTransform;
     public Card card;
     private GameObject Hand;
     private CardUI cardUI;
-    private Vector2 startPosition;
     private GameObject playArea;
     private float random;
     private bool isPointerOverCard = false;
-    //private List<Card> cardsInPlay = new List<Card>();
+    public GameObject hoveredObject;
+    public TurnSystem turnSystem;
+
+    public Image cardImageComponent;
+    public Image cardBackgroundComponent;
+    public Image cardBorderComponent;
 
     private readonly string CANVAS_TAG = "CardCanvas";
 
@@ -30,6 +38,7 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
         rectTransform = GetComponent<RectTransform>();
         card = GetComponent<Card>();
         cardUI = GetComponent<CardUI>();
+        turnSystem = TurnSystem.Instance;
 
         Hand = GameObject.FindGameObjectWithTag("Hand");
         playArea = GameObject.FindGameObjectWithTag("PlayArea");
@@ -51,10 +60,7 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
             }
         }
 
-        if (TurnSystem.Instance.turnStart)
-            {
-                hasFlipped = false;
-            }
+       
     }
 
     private IEnumerator CardRotation()
@@ -153,11 +159,17 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
             rectTransform.anchoredPosition += (eventData.delta / cardCanvas.scaleFactor);
             transform.SetParent(cardCanvas.transform, true);
         }
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(card.cardData.card_Ownership == CardOwnership.Player)
+        newParent = Hand.transform.parent;
+        cardImageComponent.raycastTarget = false;
+        cardBackgroundComponent.raycastTarget = false;
+        cardBorderComponent.raycastTarget = false;
+
+        if (card.cardData.card_Ownership == CardOwnership.Player)
         {
             isPlayerCard = true;
         }
@@ -165,10 +177,22 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!isOverPlayArea && isPlayerCard)
+        hoveredObject = eventData.pointerEnter;
+        cardImageComponent.raycastTarget = true;
+        cardBackgroundComponent.raycastTarget=true;
+        cardBorderComponent.raycastTarget=true;
+
+        if (hoveredObject.CompareTag("PlayerCardHolder") && isPlayerCard && hoveredObject != null)
+        {
+            transform.SetParent(newParent, false);
+            
+        }
+        else if (isPlayerCard && hoveredObject != null)
         {
             transform.SetParent(Hand.transform, false);
+            
         }
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -194,18 +218,17 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("PlayArea"))
+        if(collision.CompareTag("PlayArea"))
         {
             isOverPlayArea = true;
-            transform.SetParent(playArea.transform);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.CompareTag("PlayArea"))
+        if (collision.CompareTag("PlayArea"))
         {
             isOverPlayArea = false;
         }
