@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Beastform_0: 7177519193040862240
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
