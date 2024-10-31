@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 99d9596bc5d7d174fa612bbc9d6e3afb
+guid: b2abe6dafc533a84bbb9f265218b5cd9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3446352821308661216
-    second: Table1_0
+      213: 6105388536264360961
+    second: Attack_Common_Border_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Table1_0
+      name: Attack_Common_Border_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 181
-        width: 511
-        height: 252
+        x: 25
+        y: 27
+        width: 186
+        height: 267
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ed94c4a1a7e3df20800000000000000
-      internalID: 3446352821308661216
+      spriteID: 10487c7a682bab450800000000000000
+      internalID: 6105388536264360961
       vertices: []
       indices: 
       edges: []
@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Attack_Common_Border_0: 6105388536264360961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -56,7 +56,6 @@ public class CombatManager : MonoBehaviour
                 cardValue = card.card.cardData.back_Number;
             }
 
-
             if(currentType == CardType.Attack)
             {
                 if(card.card.cardData.card_Ownership == CardOwnership.Player)

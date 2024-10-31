@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f03c7d5cfefbd9b46bc3710a4a73547e
+guid: 0e936d60c62677c45b8e4bd9053e0f71
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2145413705999753333
-    second: green color_0
+      213: 88948354130265954
+    second: Defense_Ultra_Rare_Border_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: green color_0
+      name: Defense_Ultra_Rare_Border_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 384
+        x: 25
+        y: 14
+        width: 186
+        height: 289
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 570ae52166a06cd10800000000000000
-      internalID: 2145413705999753333
+      spriteID: 2674a4b8e020c3100800000000000000
+      internalID: 88948354130265954
       vertices: []
       indices: 
       edges: []
@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Defense_Ultra_Rare_Border_0: 88948354130265954
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

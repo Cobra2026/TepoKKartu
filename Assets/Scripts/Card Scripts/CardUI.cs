@@ -14,7 +14,8 @@ public class CardUI : MonoBehaviour
     public Image front_CardImage;
     public Image back_CardImage;
     [SerializeField] private Image cardBackground;
-    [SerializeField] private Image cardTypeBackground;
+    public Image cardTypeBackground;
+    public Image cardHandle;
 
     public TextMeshProUGUI cardName;
     public TextMeshProUGUI frontNumber;

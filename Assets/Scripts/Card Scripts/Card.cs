@@ -15,14 +15,14 @@ public class Card : MonoBehaviour
     }
 
     public CardType CurrentCardType()
-{
-    if (cardPosition == CardPosition.Up) 
     {
-        return cardData.front_Type;
-    }
-    else
-    {
-        return cardData.back_Type;
-    }
-}    
+        if (cardPosition == CardPosition.Up) 
+        {
+            return cardData.front_Type;
+        }
+        else
+        {
+            return cardData.back_Type;
+        }
+    }    
 }

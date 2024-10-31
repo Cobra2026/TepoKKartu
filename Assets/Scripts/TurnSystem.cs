@@ -72,15 +72,15 @@ public class TurnSystem : MonoBehaviour
 
     public void EndTurn()
     {
-        if(!playArea.hasPlayed)
+        if (!playArea.hasPlayed && playArea.cardsInPlayArea.Count > 0)
         {
-            StartCoroutine(ForcePlayCards(2));
-            //playArea.PlayAllCards();
+
+            playArea.PlayAllCards();
+
         }
-        combatManager.CalculateDamage();
+
         isMyTurn = false;
-        EndTurnDiscard();
-        StartCoroutine(EnemyTurnSimulation(2));
+        StartCoroutine(EnemyTurnSimulation(1));
     }
 
     public void StartTurn()
@@ -128,16 +128,11 @@ public class TurnSystem : MonoBehaviour
         playArea.playerCardsInPlay.Clear();
     }
 
-    private IEnumerator ForcePlayCards(int time)
-    {
-        playArea.PlayAllCards();
-        yield return new WaitForSeconds(time);
-    }
-
-    //for testing
     private IEnumerator EnemyTurnSimulation(int time)
     {
         yield return new WaitForSeconds(time);
+        combatManager.CalculateDamage();
+        EndTurnDiscard();
         StartTurn();
     }
 }

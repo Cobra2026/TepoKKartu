@@ -58,6 +58,10 @@ public class PlayAreaManager : MonoBehaviour
             playButton.SetActive(false);
             flipButton.SetActive(true);
         }
+        else
+        {
+            flipButton.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,7 +69,7 @@ public class PlayAreaManager : MonoBehaviour
         if (collision.CompareTag("PlayingCard"))
         {
             CardMovementAttemp card = collision.GetComponent<CardMovementAttemp>();
-            if (card != null)
+            if (card.card != null)
             {
                 if (!card.hasFlipped)
                 {
@@ -77,8 +81,12 @@ public class PlayAreaManager : MonoBehaviour
                         playerCardsInPlay.Add(card);
                     }
                 }
-             
             }
+            else
+            {
+              return;
+            }
+            
 
             if (cardsInPlayArea.Count >= 1 && !hasPlayed)
             {
@@ -111,7 +119,8 @@ public class PlayAreaManager : MonoBehaviour
 
             if (cardsInPlayArea.Count == 0)
             {
-                flipButton.SetActive(false);
+                playButton.SetActive(false);
+                //flipButton.SetActive(false);
             }
         }
     }
@@ -140,7 +149,10 @@ public class PlayAreaManager : MonoBehaviour
         {
             foreach (CardMovementAttemp card in cardsInPlayArea)
             {
-                card.beginFlip();
+                if (!card.hasFlipped)
+                {
+                    card.beginFlip();
+                }
             }
             hasPlayed = true;
             Debug.Log("Card(s) has been played");

@@ -15,7 +15,8 @@ MonoBehaviour:
   <card_Name>k__BackingField: Fikri
   <front_Number>k__BackingField: 9
   <back_Number>k__BackingField: 1
-  <front_Image>k__BackingField: {fileID: -5151324857947248564, guid: 3c695fb778933ba42b2405cc472ad836, type: 3}
-  <back_Image>k__BackingField: {fileID: 6476056981504957060, guid: a0d80fad3fea52944861ac384355afd0, type: 3}
+  <front_Image>k__BackingField: {fileID: -2561532944257487562, guid: af4445c1f70dc9c4f8c587b0662c5b43, type: 3}
+  <back_Image>k__BackingField: {fileID: -2561532944257487562, guid: af4445c1f70dc9c4f8c587b0662c5b43, type: 3}
   <front_Type>k__BackingField: 1
   <back_Type>k__BackingField: 0
+  <card_Ownership>k__BackingField: 0

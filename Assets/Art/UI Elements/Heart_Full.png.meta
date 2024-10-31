@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aa6220043d251b84c9c622e76cf5e211
+guid: f03d9b02f1fe1324599c3a5da49036fb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2747135728840698598
-    second: Malkuth EP1_0
+      213: 8669251620210040706
+    second: Heart_Full_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Malkuth EP1_0
+      name: Heart_Full_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 53
+        y: 119
+        width: 119
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ea6553f369cf1620800000000000000
-      internalID: 2747135728840698598
+      spriteID: 28f591bba6e5f4870800000000000000
+      internalID: 8669251620210040706
       vertices: []
       indices: 
       edges: []
@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Heart_Full_0: 8669251620210040706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

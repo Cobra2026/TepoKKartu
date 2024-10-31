@@ -23,12 +23,14 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
     private GameObject playArea;
     private float random;
     private bool isPointerOverCard = false;
+
     public GameObject hoveredObject;
     public TurnSystem turnSystem;
 
     public Image cardImageComponent;
     public Image cardBackgroundComponent;
     public Image cardBorderComponent;
+    public Image cardHandleComponent;
 
     private readonly string CANVAS_TAG = "CardCanvas";
 
@@ -80,15 +82,13 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
                 }
                 yield return new WaitForSeconds(0.01f);
             }
-
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.cardName.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-            cardUI.front_CardImage.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.backNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
         else if(card.cardPosition == CardPosition.Down)
         {
-            for(float i = 0; i <= 180f; i += 10f)
+            for(float i = 180; i >= 0; i -= 10f)
             {
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
                 if(i == 90f)
@@ -97,9 +97,8 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
                 }
                 yield return new WaitForSeconds(0.01f);
             }
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.cardName.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.back_CardImage.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.frontNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
 
@@ -126,14 +125,13 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
                 yield return new WaitForSeconds(0.01f);
             }
 
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.cardName.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-            cardUI.front_CardImage.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.backNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
         else
         {
-            for (float i = 0; i <= 180f; i += 10f)
+            for (float i = 180; i >= 0; i -= 10f)
             {
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
                 if (i == 90f)
@@ -142,9 +140,8 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
                 }
                 yield return new WaitForSeconds(0.01f);
             }
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.cardName.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.back_CardImage.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            cardUI.frontNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
 
@@ -168,6 +165,8 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
         cardImageComponent.raycastTarget = false;
         cardBackgroundComponent.raycastTarget = false;
         cardBorderComponent.raycastTarget = false;
+        cardHandleComponent.raycastTarget = false;
+
 
         if (card.cardData.card_Ownership == CardOwnership.Player)
         {
@@ -179,10 +178,11 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         hoveredObject = eventData.pointerEnter;
         cardImageComponent.raycastTarget = true;
-        cardBackgroundComponent.raycastTarget=true;
-        cardBorderComponent.raycastTarget=true;
+        cardBackgroundComponent.raycastTarget = true;
+        cardBorderComponent.raycastTarget = true;
+        cardHandleComponent.raycastTarget = true;
 
-        if (hoveredObject.CompareTag("PlayerCardHolder") && isPlayerCard && hoveredObject != null)
+        if (hoveredObject.CompareTag("PlayerCardHolder") && hoveredObject != null && card.cardData.card_Ownership == CardOwnership.Player)
         {
             transform.SetParent(newParent, false);
             

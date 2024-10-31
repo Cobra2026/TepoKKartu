@@ -24,12 +24,14 @@ public class CardSlot : MonoBehaviour, IDropHandler
         if (playArea.playerCardsInPlay.Count <= 1)
         {
             cardMovement.newParent = transform;
+            Debug.Log("Card is added to card slot: " + cardMovement.card.cardData.card_Name);
         }
         else if (playArea.playerCardsInPlay.Count > 1 && turnSystem.currentEnergy >= 2)
         {
             cardMovement.newParent = transform;
             turnSystem.currentEnergy -= 2;
             cardMovement.card.hasUsedPlayEnergy = true;
+            Debug.Log("Card is added to card slot: " + cardMovement.card.cardData.card_Name);
         }
         else if (playArea.playerCardsInPlay.Count > 1 && turnSystem.currentEnergy < 2)
         {
@@ -37,8 +39,6 @@ public class CardSlot : MonoBehaviour, IDropHandler
             
         }
 
-
-        //Debug.Log("A card is dropped");
     }
 
 

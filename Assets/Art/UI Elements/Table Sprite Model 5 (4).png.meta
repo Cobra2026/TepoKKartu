@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1b8808d92ca5f004d98cfdad5ef8f7e7
+guid: 33dd3f077d06d9c41a4831fb156afb3d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 350564406773261644
-    second: Yesod EP5 1-2_0
+      213: 4915708716582131364
+    second: Table Sprite Model 5 (4)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Yesod EP5 1-2_0
+      name: Table Sprite Model 5 (4)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 2550
+        height: 1250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c45ad9878747dd400800000000000000
-      internalID: 350564406773261644
+      spriteID: 4a65b2f780b183440800000000000000
+      internalID: 4915708716582131364
       vertices: []
       indices: 
       edges: []
@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Table Sprite Model 5 (4)_0: 4915708716582131364
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
