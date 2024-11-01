@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    //public static Deck Instance { get; private set; }
+    public static Deck Instance { get; private set; }
 
     [SerializeField] private CardPile currentDeck;
     [SerializeField] private Card cardPrefab;
