@@ -7,17 +7,15 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
-    public List<SceneAsset> storedScenes = new List<SceneAsset>();
+    public List<string> storedSceneNames = new List<string>();
     public List<Slider> sliders;
 
-    public void StoreScene(string scenePath)
+    public void StoreScene(string sceneName)
     {
-        SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
-
-        if (sceneAsset != null && !storedScenes.Contains(sceneAsset))
+        if (!string.IsNullOrEmpty(sceneName) && !storedSceneNames.Contains(sceneName))
         {
-            storedScenes.Add(sceneAsset);
-            Debug.Log("Stored Scene: " + sceneAsset.name);
+            storedSceneNames.Add(sceneName);
+            Debug.Log("Stored Scene: " + sceneName);
         }
         else
         {
@@ -25,9 +23,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public List<SceneAsset> GetStoredScenes()
+    public List<string> GetStoredScenes()
     {
-        return storedScenes;
+        return storedSceneNames;
     }
 
     public void LoadSceneByName(string sceneName)
