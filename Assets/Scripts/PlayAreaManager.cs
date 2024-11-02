@@ -95,6 +95,16 @@ public class PlayAreaManager : MonoBehaviour
         }
     }
 
+    // public void LoadData(GameData data)
+    // {
+    //     this.cardsInPlayArea = data.cardsInPlayArea;
+    // }
+
+    // public void SaveData(ref GameData data)
+    // {
+    //     data.cardsInPlayArea = this.cardsInPlayArea;
+    // }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayingCard"))

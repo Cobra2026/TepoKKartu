@@ -48,7 +48,6 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
         proceedCaroutine = true;
     }
 
-  
 
     private void Update()
     {
