@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenModeSetting : MonoBehaviour
+public class ScreenModeSetting : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private TMPro.TMP_Dropdown ScreenModeDropDown;
     private Resolutions resolutions;
@@ -36,5 +36,15 @@ public class ScreenModeSetting : MonoBehaviour
             Screen.SetResolution(resolutions.CurrentResolution.width, resolutions.CurrentResolution.height, false);
             Screen.fullScreenMode = FullScreenMode.Windowed;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
     }
 }

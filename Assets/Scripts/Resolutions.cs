@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resolutions : MonoBehaviour
+public class Resolutions : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private TMPro.TMP_Dropdown resolutionDropDown; 
     
@@ -12,6 +12,7 @@ public class Resolutions : MonoBehaviour
         new Resolution { width = 1920, height = 1080 },
         new Resolution { width = 1600, height = 900 }
     };
+    
     private List<Resolution> filteredResolutions;
 
     private int currentResolutionIndex = 0;
@@ -63,5 +64,25 @@ public class Resolutions : MonoBehaviour
                 Screen.fullScreenMode = FullScreenMode.Windowed;
                 break;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        for (int i = 0; i < filteredResolutions.Count; i++)
+        {
+            if (filteredResolutions[i].width == data.CurrentResolution.width &&
+                filteredResolutions[i].height == data.CurrentResolution.height)
+            {
+                currentResolutionIndex = i;
+                break;
+            }
+        }
+        resolutionDropDown.value = currentResolutionIndex;
+        resolutionDropDown.RefreshShownValue();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.CurrentResolution = CurrentResolution;
     }
 }

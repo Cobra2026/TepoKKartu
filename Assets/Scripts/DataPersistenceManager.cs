@@ -47,7 +47,9 @@ public class DataPersistenceManager : MonoBehaviour
             {
                 dataPersistenceObj.LoadData(gameData);
             }
-            Debug.Log("Loaded Health = " + gameData.playerCurrentHealth);
+            Debug.Log("Loaded Health = " + gameData.playerCurrentHealth + " Loaded Resolution = " + 
+            gameData.CurrentResolution.width + " x " + gameData.CurrentResolution.height);
+
         }
 
         public void SaveGame()
@@ -56,7 +58,9 @@ public class DataPersistenceManager : MonoBehaviour
             {
                 dataPersistenceObj.SaveData(ref gameData);
             }
-            Debug.Log("Saved Health = " + gameData.playerCurrentHealth);
+            Debug.Log("Saved Health = " + gameData.playerCurrentHealth + " Saved Resolution = " + 
+            gameData.CurrentResolution.width + " x " + gameData.CurrentResolution.height);
+
 
             dataHandler.Save(gameData);
         }

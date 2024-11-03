@@ -6,11 +6,11 @@ using UnityEngine;
 public class GameData
 {
     public int playerCurrentHealth;
-    // public List<CardMovementAttemp> cardsInPlayArea = new List<CardMovementAttemp>();
+    public Resolution CurrentResolution;
 
     public GameData()
     {
         this.playerCurrentHealth = 50;
-        // this.cardsInPlayArea = new List<CardMovementAttemp>();
+        CurrentResolution = new Resolution { width = 1920, height = 1080 };
     }
 }

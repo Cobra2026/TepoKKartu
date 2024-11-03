@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDataPersistence
 {
     public static PlayerHealth Instance { get; private set; }
     public TextMeshProUGUI playerHealthText;
@@ -58,4 +58,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    //for saving and loading data
+    public void LoadData(GameData data)
+    {
+        this.playerCurrentHealth = data.playerCurrentHealth;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerCurrentHealth = this.playerCurrentHealth;
+    }
 }
