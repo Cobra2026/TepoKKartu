@@ -66,23 +66,26 @@ public class Resolutions : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void LoadData(GameData data)
-    {
-        for (int i = 0; i < filteredResolutions.Count; i++)
-        {
-            if (filteredResolutions[i].width == data.CurrentResolution.width &&
-                filteredResolutions[i].height == data.CurrentResolution.height)
-            {
-                currentResolutionIndex = i;
-                break;
-            }
-        }
-        resolutionDropDown.value = currentResolutionIndex;
-        resolutionDropDown.RefreshShownValue();
-    }
-
     public void SaveData(ref GameData data)
     {
-        data.CurrentResolution = CurrentResolution;
+        data.CurrentResolution = this.CurrentResolution;
+        Debug.Log($"Saving Resolution: {data.CurrentResolution.width} x {data.CurrentResolution.height}");
+    }
+
+    public void LoadData(GameData data)
+    {
+        currentResolutionIndex = filteredResolutions.FindIndex(res =>
+            res.width == data.CurrentResolution.width && res.height == data.CurrentResolution.height);
+
+        if (currentResolutionIndex == -1)
+        {
+            currentResolutionIndex = 0;
+            Debug.LogWarning("Saved resolution not found. Defaulting to the first resolution.");
+        }
+
+        resolutionDropDown.value = currentResolutionIndex;
+        resolutionDropDown.RefreshShownValue();
+
+        SetResolution(currentResolutionIndex);
     }
 }

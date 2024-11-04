@@ -37,7 +37,6 @@ public class Deck : MonoBehaviour
             deckPile.Add(card);
         }
         Shuffle();
-
     }
 
     public void Shuffle()
@@ -94,7 +93,7 @@ public class Deck : MonoBehaviour
         {
             handPile.Remove(card);
             discardPile.Add(card);
-            card.gameObject.SetActive(false);   
+            card.gameObject.SetActive(false);
         }
     }
 
