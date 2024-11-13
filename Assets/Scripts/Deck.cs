@@ -8,12 +8,12 @@ public class Deck : MonoBehaviour
     [SerializeField] private CardPile currentDeck;
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Canvas cardCanvas;
+    // [SerializeField] private ScriptableCard cardBox;
     private TurnSystem turnSystem;
 
     public List<Card> deckPile = new();
     public List<Card> discardPile = new();
     public List<Card> handPile { get; private set; } = new();
-
 
     private void Start()
     {
@@ -84,7 +84,6 @@ public class Deck : MonoBehaviour
                     }
                 }
             }
-
     }
 
     public void Discard(Card card)
@@ -108,5 +107,11 @@ public class Deck : MonoBehaviour
         {
             Debug.Log("You dont have enough energy to draw");
         }
+    }
+
+    public void AddCardToDeck(Card card)
+    {
+        deckPile.Add(card);
+        Shuffle();
     }
 }

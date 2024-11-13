@@ -26,10 +26,7 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
     public GameObject hoveredObject;
     public TurnSystem turnSystem;
 
-    public Image cardImageComponent;
-    public Image cardBackgroundComponent;
-    public Image cardBorderComponent;
-    public Image cardHandleComponent;
+    public Image cardImageComponent, cardBackgroundComponent, cardBorderComponent, cardHandleComponent;
 
     private readonly string CANVAS_TAG = "CardCanvas";
 
