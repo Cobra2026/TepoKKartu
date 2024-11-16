@@ -605,8 +605,6 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210046277}
-<<<<<<< Updated upstream
-=======
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -644,21 +642,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280311502}
   serializedVersion: 2
->>>>>>> Stashed changes
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-<<<<<<< Updated upstream
-  m_Father: {fileID: 1731137939}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000058413, y: -0.0000014305}
-  m_SizeDelta: {x: 67.8323, y: 30.76}
-  m_Pivot: {x: 0.5, y: 0.5}
-=======
   m_Father: {fileID: 828451879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &280311504
@@ -685,7 +673,6 @@ MonoBehaviour:
   uncommonChance: 25
   rareChance: 5
   cardRewardAmount: 3
->>>>>>> Stashed changes
 --- !u!1001 &454043938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1072,8 +1059,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &530437731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1266,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
->>>>>>> Stashed changes
 --- !u!1 &584801690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,10 +1600,7 @@ RectTransform:
   - {fileID: 811290321}
   - {fileID: 454043939}
   - {fileID: 584801691}
-<<<<<<< Updated upstream
-=======
   - {fileID: 1539430897}
->>>>>>> Stashed changes
   - {fileID: 1570270395}
   - {fileID: 1731137939}
   - {fileID: 2097712867}
@@ -1687,8 +1668,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7164878811289835987, guid: 47f71527ce9a7574fbb263edd346aa3b, type: 3}
   m_PrefabInstance: {fileID: 338482301173713174}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &959900816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1804,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959900816}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!224 &1099665922 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4354279607449437232, guid: 409dc2494d8e58143acc8487ce77a5a8, type: 3}
@@ -1920,9 +1898,6 @@ Transform:
   - {fileID: 594864575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
---- !u!114 &1306460591
-=======
 --- !u!1 &1346435351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,22 +1936,11 @@ RectTransform:
   m_SizeDelta: {x: 1300, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1346435353
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 1306460588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ac55a230e781a4788cf92e1be75a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  currentHealth: 0
-=======
   m_GameObject: {fileID: 1346435351}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2056,7 +2020,6 @@ MonoBehaviour:
   enemyHealthText: {fileID: 2120084927}
   enemyMaxHealth: 0
   enemyCurrentHealth: 0
->>>>>>> Stashed changes
 --- !u!1 &1352253940
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,8 +4495,4 @@ SceneRoots:
   - {fileID: 163736365}
   - {fileID: 1306460590}
   - {fileID: 1828443890}
-<<<<<<< Updated upstream
-  - {fileID: 865536418}
-=======
   - {fileID: 828451879}
->>>>>>> Stashed changes
