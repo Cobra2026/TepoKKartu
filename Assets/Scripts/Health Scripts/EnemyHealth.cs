@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
 
     public TextMeshProUGUI enemyHealthText;
 
-    public int enemyMaxHealth;
+    public int enemyMaxHealth = 0;
     public int enemyCurrentHealth;
 
     private void Awake()
@@ -24,10 +24,6 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        SetEnemyMaxHealth(20);
-    }
 
     void Update()
     {
