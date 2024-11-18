@@ -127,6 +127,7 @@ public class TurnSystem : MonoBehaviour
 
     public void PlayerLosePhase()
     {
+        SceneController.Instance.LoadSceneByName("mainMenu");
         Debug.Log($"Phase switched to {currentPhase}");
     }
 

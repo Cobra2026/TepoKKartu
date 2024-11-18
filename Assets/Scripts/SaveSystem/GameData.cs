@@ -1,18 +1,22 @@
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class GameData : ISerializationCallbackReceiver
 {
     public int playerCurrentHealth;
     public Resolution CurrentResolution;
+    public List<ScriptableCard> globalDeck = new List<ScriptableCard>();
 
     [SerializeField] private int resolutionWidth;
     [SerializeField] private int resolutionHeight;
+
     public GameData()
     {
         this.playerCurrentHealth = 50;
         CurrentResolution = new Resolution();
+        globalDeck = new List<ScriptableCard>();
     }
 
     public void OnBeforeSerialize()

@@ -7,8 +7,21 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController Instance;
     public List<string> storedSceneNames = new List<string>();
     public List<Slider> sliders;
+
+        private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public void StoreScene(string sceneName)
     {

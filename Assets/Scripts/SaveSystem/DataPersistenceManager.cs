@@ -39,7 +39,7 @@ public class DataPersistenceManager : MonoBehaviour
 
             if(this.gameData == null)
             {
-                Debug.Log("No data was found. Initializing data to default.");
+                Debug.Log("No data was found. Initializing data to default");
                 NewGame();
             }
 
@@ -49,7 +49,6 @@ public class DataPersistenceManager : MonoBehaviour
             }
             Debug.Log("Loaded Health = " + gameData.playerCurrentHealth + " Loaded Resolution = " + 
             gameData.CurrentResolution.width + " x " + gameData.CurrentResolution.height);
-
         }
 
         public void SaveGame()

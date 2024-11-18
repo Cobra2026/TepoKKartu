@@ -19,7 +19,7 @@ public class EventSystem : MonoBehaviour
         playerHalfHealth = playerHealth.playerMaxHealth / 2;
     }
 
-    [HideInInspector] public void healHalf()
+    [HideInInspector] public void grabTheMug()
     {
         playerHealth.playerCurrentHealth = playerHealth.playerCurrentHealth + playerHalfHealth;
         if (playerHealth.playerCurrentHealth > playerHealth.playerMaxHealth)
@@ -46,5 +46,15 @@ public class EventSystem : MonoBehaviour
             playerHealth.PlayerTakeDamage(10);
             break;
         }
+    }
+
+    [HideInInspector] public void sitStill()
+    {
+        SceneController.Instance.LoadSceneByName("CombatScene");
+    }
+
+    [HideInInspector] public void putItBack()
+    {
+        SceneController.Instance.LoadSceneByName("CombatScene");
     }
 }
