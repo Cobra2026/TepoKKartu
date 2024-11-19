@@ -3789,7 +3789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -177.39001, y: -106.859985}
+  m_AnchoredPosition: {x: -177.39001, y: -106.86}
   m_SizeDelta: {x: -394.78, y: -247.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568311914
@@ -5756,16 +5756,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3818cd74ff96b143a1c9bdd23a34616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData:
-    playerCurrentHealth: 50
-    globalDeck: []
-    resolutionWidth: 0
-    resolutionHeight: 0
   playerDeck: {fileID: 1421907894}
   startEncounterDraw: 2
   starterDeck: {fileID: 11400000, guid: cd0593b5dc141e64b9772f5f4c38ca6a, type: 2}
   tempDeck: {fileID: 11400000, guid: ef1e4e1bd21d3d347a26ce088e60ac37, type: 2}
   globalDeck: []
+  isStarterDeckInitialized: 0
 --- !u!1 &2128175357
 GameObject:
   m_ObjectHideFlags: 0
@@ -5809,5 +5805,5 @@ SceneRoots:
   - {fileID: 1896817754}
   - {fileID: 1473111628}
   - {fileID: 33696158}
-  - {fileID: 1358190059}
   - {fileID: 2128175358}
+  - {fileID: 1358190059}

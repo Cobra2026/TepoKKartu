@@ -8,7 +8,8 @@ public class GameData : ISerializationCallbackReceiver
 {
     public int playerCurrentHealth;
     public Resolution CurrentResolution;
-    public List<ScriptableCard> globalDeck = new List<ScriptableCard>();
+    public List<ScriptableCard> globalDeck = new();
+    public bool isStarterDeckInitialized = false;
 
     [SerializeField] private int resolutionWidth;
     [SerializeField] private int resolutionHeight;
@@ -16,8 +17,9 @@ public class GameData : ISerializationCallbackReceiver
     public GameData()
     {
         this.playerCurrentHealth = 50;
-        CurrentResolution = new Resolution();
-        globalDeck = new List<ScriptableCard>();
+        this.CurrentResolution = new Resolution();
+        this.globalDeck = new List<ScriptableCard>();
+        this.isStarterDeckInitialized = false;
     }
 
     public void OnBeforeSerialize()

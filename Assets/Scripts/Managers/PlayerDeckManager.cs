@@ -15,6 +15,7 @@ public class PlayerDeckManager : MonoBehaviour, IDataPersistence
     [SerializeField] private CardPile tempDeck;
 
     public List<ScriptableCard> globalDeck = new();
+    [HideInInspector] public bool isStarterDeckInitialized = false;
 
     private void Awake()
     {
@@ -35,9 +36,16 @@ public class PlayerDeckManager : MonoBehaviour, IDataPersistence
 
     private void BuildStarterDeck()
     {
+        if (isStarterDeckInitialized)
+        {
+            Debug.Log("StarterDeck already initialized. Skipping...");
+            return;
+        }
         globalDeck.AddRange(starterDeck.cardsInPile);
-
         tempDeck.cardsInPile.AddRange(globalDeck);
+
+        isStarterDeckInitialized = true;
+        Debug.Log("StarterDeck initialized for the first time.");
     }
 
     private void BuildDeck()
@@ -85,10 +93,12 @@ public class PlayerDeckManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.globalDeck = data.globalDeck;
+        this.isStarterDeckInitialized = data.isStarterDeckInitialized;
     }
 
     public void SaveData(ref GameData data)
     {
         data.globalDeck = this.globalDeck;
+        data.isStarterDeckInitialized = this.isStarterDeckInitialized;
     }
 }
