@@ -17,7 +17,7 @@ public class GameData : ISerializationCallbackReceiver
     public GameData()
     {
         this.playerCurrentHealth = 50;
-        this.CurrentResolution = new Resolution();
+        this.CurrentResolution = new Resolution() { width = 1920, height = 1080 };
         this.globalDeck = new List<ScriptableCard>();
         this.isStarterDeckInitialized = false;
     }
