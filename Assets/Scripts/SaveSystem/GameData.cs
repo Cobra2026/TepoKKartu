@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
-public class GameData/* : ISerializationCallbackReceiver */
+public class GameData : ISerializationCallbackReceiver
 {
     public int playerCurrentHealth;
     public Resolution CurrentResolution;
@@ -20,14 +20,14 @@ public class GameData/* : ISerializationCallbackReceiver */
         globalDeck = new List<ScriptableCard>();
     }
 
-    // public void OnBeforeSerialize()
-    // {
-    //     resolutionWidth = CurrentResolution.width;
-    //     resolutionHeight = CurrentResolution.height;
-    // }
+    public void OnBeforeSerialize()
+    {
+        resolutionWidth = CurrentResolution.width;
+        resolutionHeight = CurrentResolution.height;
+    }
 
-    // public void OnAfterDeserialize()
-    // {
-    //     CurrentResolution = new Resolution { width = resolutionWidth, height = resolutionHeight };
-    // }
+    public void OnAfterDeserialize()
+    {
+        CurrentResolution = new Resolution { width = resolutionWidth, height = resolutionHeight };
+    }
 }
