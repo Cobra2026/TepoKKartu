@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeckManager : MonoBehaviour
-, IDataPersistence
+public class PlayerDeckManager : MonoBehaviour, IDataPersistence
 {
     public static PlayerDeckManager Instance;
-    public GameData gameData; 
 
     public Deck playerDeck;
 
@@ -28,7 +26,11 @@ public class PlayerDeckManager : MonoBehaviour
         {
             Instance = this;
         }
-        BuildStarterDeck();    
+    }
+
+    private void Start()
+    {
+        BuildStarterDeck();
     }
 
     private void BuildStarterDeck()
@@ -82,32 +84,11 @@ public class PlayerDeckManager : MonoBehaviour
     }
     public void LoadData(GameData data)
     {
-        // if (data != null)
-        // {
         this.globalDeck = data.globalDeck;
-        // }
     }
 
     public void SaveData(ref GameData data)
     {
-        // if (data != null)
-        // {
-            data.globalDeck = this.globalDeck;
-        // }
+        data.globalDeck = this.globalDeck;
     }
-
-    // public void ClearGlobalDeckData()
-    // {
-    //     if (gameData != null)
-    //     {
-    //         gameData.globalDeck.Clear();
-    //         Debug.Log("Global deck data cleared.");
-
-    //         DataPersistenceManager.instance.SaveGame();
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("GameData is null. Unable to clear global deck data.");
-    //     }
-    // }
 }

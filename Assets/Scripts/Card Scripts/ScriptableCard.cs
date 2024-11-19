@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/Card Data")]
 public class ScriptableCard : ScriptableObject
 {
-    [field: SerializeField] public string card_Name {  get; private set; }
+    [field: SerializeField] public string card_Name { get; private set; }
     [field: SerializeField] public int front_Number { get; private set; }
     [field: SerializeField] public int back_Number { get; private set; }
     [field: SerializeField] public Sprite front_Image { get; private set; }

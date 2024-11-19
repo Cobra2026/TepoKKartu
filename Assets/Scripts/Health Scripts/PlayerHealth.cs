@@ -23,11 +23,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void Start()
-    {
-        SetPlayerMaxHealth(50);
-    }
-
     private void Update()
     {
         playerHealthText.text = playerCurrentHealth + "/" + playerMaxHealth;
@@ -58,7 +53,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         }
     }
 
-    //for saving and loading data
     public void LoadData(GameData data)
     {
         this.playerCurrentHealth = data.playerCurrentHealth;

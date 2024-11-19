@@ -1591,7 +1591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 369989094}
   - component: {fileID: 369989095}
-  - component: {fileID: 369989096}
+  - component: {fileID: 369989097}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.json
---- !u!114 &369989096
+--- !u!114 &369989097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1636,14 +1636,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 369989093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ed10fed677f344b94be5c0b3d28700, type: 3}
+  m_Script: {fileID: 11500000, guid: 45ac7e42a21da664786586bffeb7ac6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storedSceneNames:
-  - CombatScene
-  - MainMenu
-  - Post-Game Screen
-  sliders: []
 --- !u!1 &370028699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,7 +2540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthText: {fileID: 1352253941}
   playerMaxHealth: 50
-  playerCurrentHealth: 40
+  playerCurrentHealth: 0
 --- !u!1 &606229700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,7 +2727,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 611978410}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 369989095}
+        m_TargetAssemblyTypeName: DataPersistenceManager, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &611978410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4794,7 +4801,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 369989096}
+      - m_Target: {fileID: 285479134}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: LoadSceneByName
         m_Mode: 5
@@ -5583,7 +5590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 40/50
+  m_text: 50/50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -7978,7 +7985,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1840855906}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 369989095}
+        m_TargetAssemblyTypeName: DataPersistenceManager, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1840855906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8377,11 +8396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3818cd74ff96b143a1c9bdd23a34616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData:
-    playerCurrentHealth: 50
-    globalDeck: []
-    resolutionWidth: 0
-    resolutionHeight: 0
   playerDeck: {fileID: 1960732224}
   startEncounterDraw: 2
   starterDeck: {fileID: 11400000, guid: cd0593b5dc141e64b9772f5f4c38ca6a, type: 2}
@@ -9576,7 +9590,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2121783718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 369989095}
+        m_TargetAssemblyTypeName: DataPersistenceManager, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2121783718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10028,7 +10054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.057, y: -12.000002}
+  m_AnchoredPosition: {x: -25.057007, y: -12.0000305}
   m_SizeDelta: {x: -1811.759, y: -794.1324}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3134210612592665436
@@ -10048,7 +10074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.057, y: -12.000002}
+  m_AnchoredPosition: {x: -25.057007, y: -12.0000305}
   m_SizeDelta: {x: -1811.759, y: -794.1324}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3191930123851639810
@@ -10694,7 +10720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.7059937, y: -12}
+  m_AnchoredPosition: {x: 2.7059937, y: -12.0000305}
   m_SizeDelta: {x: 6.056885, y: 42.419556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7971949848203773569

@@ -16,7 +16,7 @@ public class RewardManager : MonoBehaviour
 
     [SerializeField] private GameObject buttonPrefab;
 
-    [SerializeField] private List<Transform> rewardParents;
+    [SerializeField] private List<Transform> rewardParents; 
 
     [Range(0, 100)] public int commonChance = 70;
     [Range(0, 100)] public int uncommonChance = 28;
@@ -151,7 +151,7 @@ public class RewardManager : MonoBehaviour
         // rewardCanvas.enabled = false;
 
         // ClearExistingRewards();
-        // DataPersistenceManager.instance.SaveGame();
+        DataPersistenceManager.instance.SaveGame();
         SceneController.Instance.LoadSceneByName("Post-Game Screen");
         // EncounterManager.Instance.StartCombatEncounter();
     }

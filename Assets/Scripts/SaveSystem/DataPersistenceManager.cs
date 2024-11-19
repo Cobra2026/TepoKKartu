@@ -19,7 +19,7 @@ public class DataPersistenceManager : MonoBehaviour
             Debug.LogError("There is more than one Data Persistence Manager in the scene.");
         }
         instance = this;
-
+        
     }
         private void Start()
         {
@@ -49,6 +49,7 @@ public class DataPersistenceManager : MonoBehaviour
             }
             Debug.Log("Loaded Health = " + gameData.playerCurrentHealth + " Loaded Resolution = " + 
             gameData.CurrentResolution.width + " x " + gameData.CurrentResolution.height);
+
         }
 
         public void SaveGame()

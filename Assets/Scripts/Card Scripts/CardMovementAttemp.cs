@@ -56,8 +56,6 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
                 StartCoroutine(CardRotation());
             }
         }
-
-       
     }
 
     private IEnumerator CardRotation()
@@ -96,9 +94,7 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
             cardUI.frontNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-
         proceedCaroutine = true;
-
 
     }
 
