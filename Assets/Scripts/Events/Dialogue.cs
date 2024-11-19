@@ -5,14 +5,28 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
+    public static Dialogue instance;
     public TextMeshProUGUI textComponent;
+    private bool isTyping = false;
     public string[] lines;
     public float textSpeed;
 
-    private int index;
-    private int lastIndex = -1;
+    public int index = 1;
+    // private int lastIndex = -1;
 
-    void Start()
+    public void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
+    public void DisplayText()
     {
         textComponent.text = string.Empty;
         StartDialogue();
@@ -36,45 +50,52 @@ public class Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
-        index = GetRandomLineIndex();
+        // index = GetRandomLineIndex();
         StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine()
+    public IEnumerator TypeLine()
     {
+        if (isTyping)
+        {
+            yield break;
+        }
+        isTyping = true;
+        textComponent.text = string.Empty;
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+        isTyping = false;
     }
 
-    public void NextLine()
-    {
-        if (textComponent.text == lines[index])
-        {
-           index = GetRandomLineIndex();
+    // public void NextLine()
+    // {
+    //     if (textComponent.text == lines[index])
+    //     {
+    //        index = GetRandomLineIndex();
 
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            StopAllCoroutines();
-            textComponent.text = lines[index];
-        }
-    }
+    //         textComponent.text = string.Empty;
+    //         StartCoroutine(TypeLine());
+    //     }
+    //     else
+    //     {
+    //         StopAllCoroutines();
+    //         textComponent.text = lines[index];
+    //     }
+    // }
 
-    int GetRandomLineIndex()
-    {
-        int randomIndex;
+    // int GetRandomLineIndex()
+    // {
+    //     int randomIndex;
 
-        do
-        {
-            randomIndex = Random.Range(0, lines.Length);
-        } while (randomIndex == lastIndex);
+    //     do
+    //     {
+    //         randomIndex = Random.Range(0, lines.Length);
+    //     } while (randomIndex == lastIndex);
 
-        lastIndex = randomIndex;
-        return randomIndex;
-    }
+    //     lastIndex = randomIndex;
+    //     return randomIndex;
+    // }
 }

@@ -7,6 +7,8 @@ public class EventSystem : MonoBehaviour
     PlayerHealth playerHealth;
     private int playerHalfHealth;
     private int randomID;
+    private bool isOnCooldown = false;
+    public float cooldownTime = 2f;
 
     void Awake()
     {
@@ -27,6 +29,11 @@ public class EventSystem : MonoBehaviour
             playerHealth.playerCurrentHealth = playerHealth.playerMaxHealth;
         }
         Debug.Log("Player is healed half health");
+        StartCoroutine(CooldownRoutine());
+        if (!isOnCooldown)
+        {
+            SceneController.Instance.LoadSceneByName("CombatScene");
+        }
     }
 
     [HideInInspector] public void lonelyBag()
@@ -48,13 +55,15 @@ public class EventSystem : MonoBehaviour
         }
     }
 
-    [HideInInspector] public void sitStill()
+    [HideInInspector] public void changeScene()
     {
         SceneController.Instance.LoadSceneByName("CombatScene");
     }
 
-    [HideInInspector] public void putItBack()
+    private IEnumerator CooldownRoutine()
     {
-        SceneController.Instance.LoadSceneByName("CombatScene");
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        isOnCooldown = false;
     }
 }
