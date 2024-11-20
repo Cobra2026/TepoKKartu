@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Background Tavern yang diminta_0: -2522250706656775656
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
