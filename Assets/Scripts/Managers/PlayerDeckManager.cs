@@ -90,6 +90,14 @@ public class PlayerDeckManager : MonoBehaviour, IDataPersistence
         globalDeck.Remove(card);
         Debug.Log($"Removed {card.card_Name} from player deck.");
     }
+
+    public void DeleteDeckData()
+    {
+        PlayerHealth.Instance.playerCurrentHealth = 50;
+        this.globalDeck.Clear();
+        isStarterDeckInitialized = false;
+    }
+
     public void LoadData(GameData data)
     {
         this.globalDeck = data.globalDeck;
