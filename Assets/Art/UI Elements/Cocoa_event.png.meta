@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cocoa_event_0: 3280478397688662689
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
