@@ -126,9 +126,9 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void AddCardToDeck(Card card)
-    {
-        deckPile.Add(card);
-        Shuffle();
-    }
+    // public void AddCardToDeck(Card card)
+    // {
+    //     deckPile.Add(card);
+    //     Shuffle();
+    // }
 }

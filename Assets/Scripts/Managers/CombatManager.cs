@@ -91,7 +91,7 @@ public class CombatManager : MonoBehaviour
         {
             DealDamageToPlayer(enemyTotalAttack);
         }
-        WinLoseManager.Instance.CheckWinLoseCondition();
+        // WinLoseManager.Instance.CheckWinLoseCondition();
     }
 
     private void DealDamageToPlayer(int damage)

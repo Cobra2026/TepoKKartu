@@ -29,12 +29,12 @@ public class PlayerDeckManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void Start()
-    {
-        BuildStarterDeck();
-    }
+    // private void Start()
+    // {
+    //     BuildStarterDeck();
+    // }
 
-    private void BuildStarterDeck()
+    public void BuildStarterDeck()
     {
         if (isStarterDeckInitialized)
         {
