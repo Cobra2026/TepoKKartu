@@ -5,30 +5,46 @@ using TMPro;
 
 public class Deck : MonoBehaviour
 {
-    [SerializeField] private CardPile currentDeck;
+    public CardPile currentDeck;
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Canvas cardCanvas;
     private TurnSystem turnSystem;
+
+    public int drawAmount = 1;
 
     public List<Card> deckPile = new();
     public List<Card> discardPile = new();
     public List<Card> handPile { get; private set; } = new();
 
-
     private void Start()
     {
         turnSystem = TurnSystem.Instance;
-        //InstantiateDeck();
-        //TurnStartDraw(3);
     }
 
-    private void Update()
+    public void ClearAll()
     {
+        foreach (var card in deckPile)
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (var card in discardPile)
+        {
+            Destroy(card.gameObject);
+        }
+        foreach (var card in handPile)
+        {
+            Destroy(card.gameObject);
+        }
 
+        deckPile.Clear();
+        discardPile.Clear();
+        handPile.Clear();
     }
 
     public void InstantiateDeck()
     {
+        if (currentDeck == null) return;
+
         for(int i = 0; i < currentDeck.cardsInPile.Count; i++)
         {
             Card card = Instantiate(cardPrefab, cardCanvas.transform);
@@ -37,7 +53,6 @@ public class Deck : MonoBehaviour
             deckPile.Add(card);
         }
         Shuffle();
-
     }
 
     public void Shuffle()
@@ -51,9 +66,9 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void TurnStartDraw(int value)
+    public void TurnStartDraw()
     {
-            for (int i = 0; i < value; i++)
+            for (int i = 0; i < drawAmount; i++)
             {
                 if (deckPile.Count == 0 && discardPile.Count != 0)
                 {
@@ -85,7 +100,6 @@ public class Deck : MonoBehaviour
                     }
                 }
             }
-
     }
 
     public void Discard(Card card)
@@ -94,7 +108,7 @@ public class Deck : MonoBehaviour
         {
             handPile.Remove(card);
             discardPile.Add(card);
-            card.gameObject.SetActive(false);   
+            card.gameObject.SetActive(false);
         }
     }
 
@@ -102,7 +116,7 @@ public class Deck : MonoBehaviour
     {
         if(TurnSystem.Instance.currentEnergy >= 1)
         {
-            TurnStartDraw(1);
+            TurnStartDraw();
             TurnSystem.Instance.currentEnergy -= 1;
         }
         else
@@ -111,9 +125,6 @@ public class Deck : MonoBehaviour
             return;
         }
     }
-<<<<<<< Updated upstream
-}
-=======
 
     public void AnyAmountDraw(int amount)
     {
@@ -123,4 +134,3 @@ public class Deck : MonoBehaviour
     }
 
 }
->>>>>>> Stashed changes

@@ -8,15 +8,10 @@ using Unity.VisualScripting;
 public class CardUI : MonoBehaviour
 {
     private Card card;
-    //private CardPosition cardPosition;
 
     //[Header("Prefab elements")]
     public Image front_CardImage;
     public Image back_CardImage;
-<<<<<<< Updated upstream
-    [SerializeField] private Image cardBackground;
-=======
->>>>>>> Stashed changes
     public Image cardTypeBackground;
     public Image cardHandle;
 
@@ -25,8 +20,13 @@ public class CardUI : MonoBehaviour
     public TextMeshProUGUI backNumber;
     public TextMeshProUGUI cardDescription;
 
-    [SerializeField] private Sprite attackBackground;
-    [SerializeField] private Sprite defendBackground;
+    [SerializeField] private Sprite commonAttackBackground;
+    [SerializeField] private Sprite uncommonAttackBackground;
+    [SerializeField] private Sprite rareAttackBackground;
+    [SerializeField] private Sprite commonDefendBackground;
+    [SerializeField] private Sprite uncommonDefendBackground;
+    [SerializeField] private Sprite rareDefendBackground;
+    
 
     private void Awake()
     {
@@ -89,10 +89,10 @@ public class CardUI : MonoBehaviour
             switch (card.cardData.front_Type)
             {
                 case CardType.Attack:
-                    cardTypeBackground.sprite = attackBackground;
+                    cardTypeBackground.sprite = GetRarityBackground(card.cardData.card_Rarity, true);
                     break;
                 case CardType.Defend:
-                    cardTypeBackground.sprite = defendBackground;
+                    cardTypeBackground.sprite = GetRarityBackground(card.cardData.card_Rarity, false); 
                     break;
             }
         }
@@ -103,18 +103,30 @@ public class CardUI : MonoBehaviour
             switch (card.cardData.back_Type)
             {
                 case CardType.Attack:
-                    cardTypeBackground.sprite = attackBackground;
+                    cardTypeBackground.sprite = GetRarityBackground(card.cardData.card_Rarity, true);
                     break;
                 case CardType.Defend:
-                    cardTypeBackground.sprite = defendBackground;
+                    cardTypeBackground.sprite = GetRarityBackground(card.cardData.card_Rarity, false);
                     break;
             }
         }
     }
 
+    private Sprite GetRarityBackground(CardRarity rarity, bool isAttack)
+    {
+        switch (rarity)
+        {
+            case CardRarity.Common:
+                return isAttack ? commonAttackBackground : commonDefendBackground;
+            case CardRarity.Uncommon:
+                return isAttack ? uncommonAttackBackground : uncommonDefendBackground;
+            case CardRarity.Rare:
+                return isAttack ? rareAttackBackground : rareDefendBackground;
+            default:
+                return isAttack ? commonAttackBackground: commonDefendBackground;
+        }
+    }
   
-<<<<<<< Updated upstream
-=======
     private bool isFrontAttack(ScriptableCard card)
     {
         if (card.front_Type == CardType.Attack) return true;
@@ -143,5 +155,4 @@ public class CardUI : MonoBehaviour
         cardDescription.text = cardData.card_Description;
 
     }
->>>>>>> Stashed changes
 }

@@ -135,16 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   front_CardImage: {fileID: 2063397604855713581}
   back_CardImage: {fileID: 2063397604855713581}
-  cardBackground: {fileID: 1119267173408177140}
   cardTypeBackground: {fileID: 5299525388753536268}
   cardHandle: {fileID: 1537496014859912616}
   cardName: {fileID: 6360519924846959878}
   frontNumber: {fileID: 8706461849456767061}
   backNumber: {fileID: 8698561947798080692}
-<<<<<<< Updated upstream
-  attackBackground: {fileID: 6105388536264360961, guid: b2abe6dafc533a84bbb9f265218b5cd9, type: 3}
-  defendBackground: {fileID: -7489671612492790522, guid: b1342c156fb359d4cb83f7d87c07c1be, type: 3}
-=======
   cardDescription: {fileID: 9170706796227119149}
   commonAttackBackground: {fileID: 2789666913351109371, guid: 6610e8202586d564288811996be5fa54, type: 3}
   uncommonAttackBackground: {fileID: -7991491663481265469, guid: 87757d9c59290a44883f436805e5476e, type: 3}
@@ -152,7 +147,6 @@ MonoBehaviour:
   commonDefendBackground: {fileID: 5325639082435987260, guid: 1ac8ce66d75cc4544ab361d3a900f24d, type: 3}
   uncommonDefendBackground: {fileID: -7377784533752186142, guid: fda0a5d54f9a3cc4e973ffb0414ae3f0, type: 3}
   rareDefendBackground: {fileID: 6563036736076743355, guid: 7d4fd40401de20449aead9519165cca9, type: 3}
->>>>>>> Stashed changes
 --- !u!114 &193511305136916404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,13 +665,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
-  m_AnchoredPosition: {x: -42, y: 62.1}
-  m_SizeDelta: {x: 6.1444, y: 11.9231}
-=======
   m_AnchoredPosition: {x: -64, y: 87}
   m_SizeDelta: {x: 21, y: 15}
->>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &836569766446800782
 CanvasRenderer:
@@ -707,11 +696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< Updated upstream
-  m_text: 5
-=======
   m_text: 0
->>>>>>> Stashed changes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -745,8 +730,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -776,7 +761,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.17572021, z: 0, w: 0.35910034}
+  m_margin: {x: 0, y: 0.17572021, z: 0.28686523, w: 0.0047302246}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -970,13 +955,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
-  m_AnchoredPosition: {x: -42, y: 62.1}
-  m_SizeDelta: {x: 6.1444, y: 11.9231}
-=======
   m_AnchoredPosition: {x: -64, y: 87}
   m_SizeDelta: {x: 21, y: 15}
->>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6546202412538788469
 CanvasRenderer:
@@ -1006,11 +986,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< Updated upstream
-  m_text: 6
-=======
   m_text: 0
->>>>>>> Stashed changes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -1044,8 +1020,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1075,9 +1051,9 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.17572021, z: 0, w: 0.35910034}
+  m_margin: {x: 0, y: 0.17572021, z: 0.15808105, w: 0.35910034}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}

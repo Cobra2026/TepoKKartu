@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Unity.UI;
 using UnityEngine.UI;
 
 public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -39,70 +38,6 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
         cardRotation = GetComponent<CardRotation>();
         turnSystem = TurnSystem.Instance;
         Hand = GameObject.FindGameObjectWithTag("Hand");
-<<<<<<< Updated upstream
-        playArea = GameObject.FindGameObjectWithTag("PlayArea");
-
-        proceedCaroutine = true;
-    }
-
-  
-
-    private void Update()
-    {
-        random = Random.Range(0f, 1f);
-
-        if (Input.GetMouseButtonDown(1) && isPointerOverCard && !isOverPlayArea)
-        {
-            if (proceedCaroutine)
-            {
-                StartCoroutine(CardRotation());
-            }
-        }
-
-       
-    }
-
-    private IEnumerator CardRotation()
-    {
-        proceedCaroutine = false;
-
-
-        if(card.cardPosition == CardPosition.Up)
-        {
-            for(float i = 0; i <= 180f; i += 10f)
-            {
-                transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if(i == 90f)
-                {
-                    card.cardPosition = CardPosition.Down;
-
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.backNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-        else if(card.cardPosition == CardPosition.Down)
-        {
-            for(float i = 180; i >= 0; i -= 10f)
-            {
-                transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if(i == 90f)
-                {
-                    card.cardPosition = CardPosition.Up;
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.frontNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-
-        proceedCaroutine = true;
-=======
->>>>>>> Stashed changes
-
 
     }
 
