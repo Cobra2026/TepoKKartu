@@ -32,7 +32,7 @@ public class Deck : MonoBehaviour
         for(int i = 0; i < currentDeck.cardsInPile.Count; i++)
         {
             Card card = Instantiate(cardPrefab, cardCanvas.transform);
-            card.setUp(currentDeck.cardsInPile[i]);
+            card.SetUp(currentDeck.cardsInPile[i]);
             card.gameObject.SetActive(false);
             deckPile.Add(card);
         }
@@ -69,10 +69,10 @@ public class Deck : MonoBehaviour
                     deckPile[0].gameObject.SetActive(true);
                     deckPile.RemoveAt(0);
                     
-                    CardMovementAttemp cardMovemnt = drawnCard.GetComponent<CardMovementAttemp>();
-                    if (cardMovemnt != null)
+                    var cardRotation = drawnCard.GetComponent<CardRotation>();
+                    if (cardRotation != null)
                     {
-                        cardMovemnt.hasFlipped = false;
+                        cardRotation.hasFlipped = false;
                     }
                     
                     if(drawnCard.cardData.card_Ownership == CardOwnership.Player)
@@ -108,6 +108,19 @@ public class Deck : MonoBehaviour
         else
         {
             Debug.Log("You dont have enough energy to draw");
+            return;
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    public void AnyAmountDraw(int amount)
+    {
+        drawAmount += amount;
+        TurnStartDraw();
+        drawAmount -= amount;
+    }
+
+}
+>>>>>>> Stashed changes

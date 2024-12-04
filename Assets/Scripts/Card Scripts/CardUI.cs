@@ -13,13 +13,17 @@ public class CardUI : MonoBehaviour
     //[Header("Prefab elements")]
     public Image front_CardImage;
     public Image back_CardImage;
+<<<<<<< Updated upstream
     [SerializeField] private Image cardBackground;
+=======
+>>>>>>> Stashed changes
     public Image cardTypeBackground;
     public Image cardHandle;
 
     public TextMeshProUGUI cardName;
     public TextMeshProUGUI frontNumber;
     public TextMeshProUGUI backNumber;
+    public TextMeshProUGUI cardDescription;
 
     [SerializeField] private Sprite attackBackground;
     [SerializeField] private Sprite defendBackground;
@@ -53,8 +57,13 @@ public class CardUI : MonoBehaviour
     private void SetCardText()
     {
         cardName.text = card.cardData.card_Name;
-        frontNumber.text = card.cardData.front_Number.ToString();
-        backNumber.text = card.cardData.back_Number.ToString();
+        frontNumber.text = card.tempFrontNumber.ToString();
+        backNumber.text = card.tempBackNumber.ToString();
+         
+        if (card.cardData.card_Description == null)
+            return;
+
+        cardDescription.text = card.cardData.card_Description;
     }
 
     private void SetCardImage()
@@ -104,4 +113,35 @@ public class CardUI : MonoBehaviour
     }
 
   
+<<<<<<< Updated upstream
+=======
+    private bool isFrontAttack(ScriptableCard card)
+    {
+        if (card.front_Type == CardType.Attack) return true;
+        else return false;
+    }
+
+    public void SetCardData(ScriptableCard cardData)
+    {
+        if (cardData == null)
+        {
+            return;
+        }
+
+        // Set the card text and images
+        cardTypeBackground.sprite = GetRarityBackground(cardData.card_Rarity, isFrontAttack(cardData));
+
+        cardName.text = cardData.card_Name;
+        frontNumber.text = cardData.front_Number.ToString();
+        backNumber.text = cardData.back_Number.ToString();
+        front_CardImage.sprite = cardData.front_Image;
+        back_CardImage.sprite = cardData.back_Image;
+
+        if (cardData.card_Description == null)
+            return;
+
+        cardDescription.text = cardData.card_Description;
+
+    }
+>>>>>>> Stashed changes
 }

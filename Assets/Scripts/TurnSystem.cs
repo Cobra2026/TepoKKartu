@@ -7,6 +7,11 @@ public class TurnSystem : MonoBehaviour
 {
     public static TurnSystem Instance { get; private set; }
 
+<<<<<<< Updated upstream:Assets/Scripts/TurnSystem.cs
+=======
+    public CombatPhase currentPhase;
+
+>>>>>>> Stashed changes:Assets/Scripts/Managers/TurnSystem.cs
     public bool isMyTurn;
     public bool turnStart = false;
 
@@ -23,6 +28,9 @@ public class TurnSystem : MonoBehaviour
     public TextMeshProUGUI energyText;
     public PlayAreaManager playArea;
     public CombatManager combatManager;
+
+    private List<(CardEffect effect, Card currentCard, List<Card> cardList, int turnAmount)> scheduledEffects =
+        new List<(CardEffect effect, Card currentCard, List<Card> cardList, int turnAmount)>();
 
     private void Awake()
     {
@@ -90,6 +98,15 @@ public class TurnSystem : MonoBehaviour
         currentEnergy = startEnergy;
         turnCount += 1;
         playArea.hasPlayed = false;
+<<<<<<< Updated upstream:Assets/Scripts/TurnSystem.cs
+=======
+        playArea.enemyHasEntered = false;
+
+        playerDeck.TurnStartDraw();
+        enemyDeck.TurnStartDraw();
+
+        ExecuteScheduledEffect();
+>>>>>>> Stashed changes:Assets/Scripts/Managers/TurnSystem.cs
     }
 
     private void PlayerMatchStart()
@@ -106,32 +123,75 @@ public class TurnSystem : MonoBehaviour
     
     private void EndTurnDiscard()
     {
-        List<CardMovementAttemp> cardsToDiscard = new List<CardMovementAttemp>();
+        List<Card> cardsToDiscard = new List<Card>();
 
-        foreach(CardMovementAttemp cardMovement in playArea.cardsInPlayArea)
+        foreach(Card card in playArea.cardsInPlayArea)
         {
-            cardsToDiscard.Add(cardMovement);
+            cardsToDiscard.Add(card);
         }
 
-        foreach(CardMovementAttemp cardMovement in cardsToDiscard)
+        foreach(Card card in cardsToDiscard)
         {
-            if(cardMovement.card.cardData.card_Ownership != CardOwnership.Enemy)
+            if(card.cardData.card_Ownership != CardOwnership.Enemy)
             {
-                playerDeck.Discard(cardMovement.card);
+                playerDeck.Discard(card);
             }
             else
             {
-                enemyDeck.Discard(cardMovement.card);
+                enemyDeck.Discard(card);
             }
         }
         playArea.cardsInPlayArea.Clear();
         playArea.playerCardsInPlay.Clear();
     }
 
+<<<<<<< Updated upstream:Assets/Scripts/TurnSystem.cs
     private IEnumerator EnemyTurnSimulation(int time)
+=======
+    public void RegisterEffect(CardEffect effect, Card currentCard, List<Card> cardList, int turnAmount)
     {
-        yield return new WaitForSeconds(time);
+        scheduledEffects.Add((effect, currentCard, cardList, turnAmount));
+    }
+
+    public void ExecuteScheduledEffect()
+    {
+        if (scheduledEffects.Count > 0)
+        {
+            for (int i = scheduledEffects.Count - 1; i >= 0; i--)
+            {
+                var (effect, currentCard, cardList, turnAmount) = scheduledEffects[i];
+                if (turnAmount == 0)
+                {
+                    scheduledEffects.RemoveAt(i);
+
+                }
+                else
+                {
+                    effect.ExecuteEffect(currentCard, cardList);
+                    scheduledEffects[i] = (effect, currentCard, cardList, turnAmount - 1);
+                }
+            }
+        }
+    }
+
+    private void ActivateAllCards()
+    { 
+        foreach(var card in playArea.cardsInPlayArea)
+        {
+            card.PlayCard(playArea.cardsInPlayArea);
+        }
+    }
+
+    private IEnumerator SimulateEndTurn(float time)
+>>>>>>> Stashed changes:Assets/Scripts/Managers/TurnSystem.cs
+    {
+        ActivateAllCards();
+        yield return new WaitForSeconds(time * 2);
         combatManager.CalculateDamage();
+<<<<<<< Updated upstream:Assets/Scripts/TurnSystem.cs
+=======
+
+>>>>>>> Stashed changes:Assets/Scripts/Managers/TurnSystem.cs
         EndTurnDiscard();
         StartTurn();
     }

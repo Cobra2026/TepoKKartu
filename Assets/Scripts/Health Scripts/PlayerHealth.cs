@@ -30,6 +30,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        if (playerHealthText == null)
+            return;
+
         playerHealthText.text = playerCurrentHealth + "/" + playerMaxHealth;
     }
     public void SetPlayerMaxHealth(int newMaxHealth)

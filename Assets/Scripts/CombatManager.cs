@@ -6,9 +6,17 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
 
+<<<<<<< Updated upstream:Assets/Scripts/CombatManager.cs
     public PlayAreaManager playArea;
     public PlayerHealth playerHealth;
     public EnemyHealth enemyHealth;
+=======
+    [HideInInspector] public PlayAreaManager playArea;
+    [HideInInspector] public PlayerHealth playerHealth;
+    [HideInInspector] public EnemyHealth enemyHealth;
+    [SerializeField] private HealthBarUI playerHealthBar;
+    [SerializeField] private HealthBarUI enemyHealthBar;
+>>>>>>> Stashed changes:Assets/Scripts/Managers/CombatManager.cs
 
     public int playerShield = 0;
     public int enemyShield = 0;
@@ -30,6 +38,12 @@ public class CombatManager : MonoBehaviour
         playArea = PlayAreaManager.Instance;
         playerHealth = PlayerHealth.Instance;
         enemyHealth = EnemyHealth.Instance;
+
+        if (TurnSystem.Instance.currentPhase == CombatPhase.CombatStart)
+        {
+            enemyHealthBar.SetMaxHealthBar(enemyHealth.enemyCurrentHealth, enemyHealth.enemyMaxHealth);
+        }
+        playerHealthBar.SetMaxHealthBar(playerHealth.playerCurrentHealth, playerHealth.playerMaxHealth);
     }
 
     public void CalculateDamage()
@@ -40,29 +54,29 @@ public class CombatManager : MonoBehaviour
         int enemyTotalDefense = 0;
 
 
-        foreach(CardMovementAttemp card in playArea.cardsInPlayArea)
+        foreach(Card card in playArea.cardsInPlayArea)
         {
             int cardValue = 0;
 
-            CardType currentType = card.card.CurrentCardType();
+            CardType currentType = card.CurrentCardType();
             
 
-            if(card.card.cardPosition == CardPosition.Up)
+            if(card.cardPosition == CardPosition.Up)
             {
-                cardValue = card.card.cardData.front_Number;
+                cardValue = card.tempFrontNumber;
             }
             else
             {
-                cardValue = card.card.cardData.back_Number;
+                cardValue = card.tempBackNumber;
             }
 
             if(currentType == CardType.Attack)
             {
-                if(card.card.cardData.card_Ownership == CardOwnership.Player)
+                if(card.cardData.card_Ownership == CardOwnership.Player)
                 {
                     playerTotalAttack += cardValue;
                 }
-                else if(card.card.cardData.card_Ownership == CardOwnership.Enemy)
+                else if(card.cardData.card_Ownership == CardOwnership.Enemy)
                 {
                     enemyTotalAttack += cardValue;
                 }
@@ -70,11 +84,11 @@ public class CombatManager : MonoBehaviour
 
             else if(currentType == CardType.Defend)
             {
-                if(card.card.cardData.card_Ownership == CardOwnership.Player)
+                if(card.cardData.card_Ownership == CardOwnership.Player)
                 {
                     playerTotalDefense += cardValue;
                 }
-                else if(card.card.cardData.card_Ownership== CardOwnership.Enemy)
+                else if(card.cardData.card_Ownership== CardOwnership.Enemy)
                 {
                     enemyTotalDefense += cardValue;
                 }
@@ -86,12 +100,18 @@ public class CombatManager : MonoBehaviour
         if (playerTotalAttack > enemyTotalAttack)
         {
             DealDamageToEnemy(playerTotalAttack);
+            enemyHealthBar.SetHealthBar(enemyHealth.enemyCurrentHealth);
         }
         else if (playerTotalAttack < enemyTotalAttack)
         {
             DealDamageToPlayer(enemyTotalAttack);
-        }
+            playerHealthBar.SetHealthBar(playerHealth.playerCurrentHealth);
 
+        }
+<<<<<<< Updated upstream:Assets/Scripts/CombatManager.cs
+
+=======
+>>>>>>> Stashed changes:Assets/Scripts/Managers/CombatManager.cs
     }
 
     private void DealDamageToPlayer(int damage)
@@ -110,6 +130,22 @@ public class CombatManager : MonoBehaviour
             }
         }
         playerHealth.PlayerTakeDamage(damage);
+<<<<<<< Updated upstream:Assets/Scripts/CombatManager.cs
+=======
+
+        foreach (var card in playArea.cardsInPlayArea)
+        {
+            if (card.isBuffed)
+            {
+                card.RevertBuff();
+            }
+        }
+
+        if(playerHealth.playerCurrentHealth <= 0)
+        {
+            TurnSystem.Instance.SwitchPhase(CombatPhase.PlayerLose);
+        }
+>>>>>>> Stashed changes:Assets/Scripts/Managers/CombatManager.cs
     }
 
     private void DealDamageToEnemy(int damage)
@@ -128,7 +164,32 @@ public class CombatManager : MonoBehaviour
             }
         }
         enemyHealth.EnemyTakeDamage(damage);
+<<<<<<< Updated upstream:Assets/Scripts/CombatManager.cs
     }
 
     
+=======
+
+        foreach (var card in playArea.cardsInPlayArea)
+        {
+            if (card.isBuffed)
+            {
+                card.RevertBuff();
+            }
+        }
+
+        if (enemyHealth.enemyCurrentHealth <= 0)
+        {
+            TurnSystem.Instance.SwitchPhase(CombatPhase.PlayerWin);
+        }
+    }
+
+
+    //for testing
+    public void Kill()
+    {
+        int damage = 1000;
+        DealDamageToEnemy(damage);
+    }
+>>>>>>> Stashed changes:Assets/Scripts/Managers/CombatManager.cs
 }

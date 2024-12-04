@@ -14,6 +14,9 @@ public class ScriptableCard : ScriptableObject
     [field: SerializeField] public CardType back_Type { get; private set; }
     [field: SerializeField] public CardOwnership card_Ownership { get; private set; }
 
+    [field: SerializeField] public List<CardEffect> card_Effect;
+    [field: SerializeField, TextArea] public string card_Description { get; private set; }
+
 
 }
 
