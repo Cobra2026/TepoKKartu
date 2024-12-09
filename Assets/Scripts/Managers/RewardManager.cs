@@ -70,11 +70,11 @@ public class RewardManager : MonoBehaviour
 
             CardRarity selectedRarity;
 
-            if (rarityRoll < rareChance)
+            if (rarityRoll <= rareChance)
             {
                 selectedRarity = CardRarity.Rare;
             }
-            else if (rarityRoll < rareChance + uncommonChance)
+            else if (rarityRoll <= rareChance + uncommonChance)
             {
                 selectedRarity = CardRarity.Uncommon;
             }
@@ -148,12 +148,8 @@ public class RewardManager : MonoBehaviour
 
     private void ProceedToNextEncounter()
     {
-        // rewardCanvas.enabled = false;
-
-        // ClearExistingRewards();
         DataPersistenceManager.instance.SaveGame();
         SceneController.Instance.LoadSceneByName("Post-Game Screen");
-        // EncounterManager.Instance.StartCombatEncounter();
     }
 
     private void ClearExistingRewards()

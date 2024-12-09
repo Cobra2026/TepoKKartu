@@ -15,6 +15,12 @@ TagManager:
   - PlayerCardHolder
   - EnemyDeck
   - EnemyHealth
+  - PlayerDeckPile
+  - PlayerDiscardPile
+  - EnemyDeckPile
+  - EnemyDiscardPile
+  - EnemyUIComponent
+  - PlayerUIComponent
   layers:
   - Default
   - TransparentFX
