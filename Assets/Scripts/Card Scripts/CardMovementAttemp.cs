@@ -4,27 +4,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class CardMovementAttemp : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    //private bool isDragging = false;
     [HideInInspector] public Transform newParent;
-
-    private bool proceedCaroutine;
-    private bool isOverPlayArea = false;
-    public bool hasFlipped = false;
-    public bool isPlayerCard = false;
+    [HideInInspector] public bool isPlayerCard = false;
+    [HideInInspector] public bool isDragging = false;
 
     private Canvas cardCanvas;
     private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
     public Card card;
     private GameObject Hand;
     private CardUI cardUI;
-    private GameObject playArea;
-    private float random;
-    private bool isPointerOverCard = false;
+    private CardHover cardHover;
+    public CardRotation cardRotation;
 
     public GameObject hoveredObject;
     public TurnSystem turnSystem;
+    private AudioManager audioManager;
+
 
     public Image cardImageComponent;
     public Image cardBackgroundComponent;
@@ -37,120 +35,27 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         cardCanvas = GameObject.FindGameObjectWithTag(CANVAS_TAG).GetComponent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
         card = GetComponent<Card>();
         cardUI = GetComponent<CardUI>();
+        cardRotation = GetComponent<CardRotation>();
+        cardHover = GetComponent<CardHover>();
         turnSystem = TurnSystem.Instance;
+        audioManager = AudioManager.Instance;
 
         Hand = GameObject.FindGameObjectWithTag("Hand");
-        playArea = GameObject.FindGameObjectWithTag("PlayArea");
 
-        proceedCaroutine = true;
     }
-
-  
 
     private void Update()
     {
-        random = Random.Range(0f, 1f);
-
-        if (Input.GetMouseButtonDown(1) && isPointerOverCard && !isOverPlayArea)
-        {
-            if (proceedCaroutine)
-            {
-                StartCoroutine(CardRotation());
-            }
-        }
-
-       
+        if(cardRotation.isDragging) 
+            canvasGroup.blocksRaycasts = false;
     }
-
-    private IEnumerator CardRotation()
-    {
-        proceedCaroutine = false;
-
-
-        if(card.cardPosition == CardPosition.Up)
-        {
-            for(float i = 0; i <= 180f; i += 10f)
-            {
-                transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if(i == 90f)
-                {
-                    card.cardPosition = CardPosition.Down;
-
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.backNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-        else if(card.cardPosition == CardPosition.Down)
-        {
-            for(float i = 180; i >= 0; i -= 10f)
-            {
-                transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if(i == 90f)
-                {
-                    card.cardPosition = CardPosition.Up;
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.frontNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-
-        proceedCaroutine = true;
-
-
-    }
-
-    private IEnumerator Flip()
-    {
-        proceedCaroutine = false;
-
-
-        if (random < 0.5f)
-        {
-            for (float i = 0; i <= 180f; i += 10f)
-            {
-                transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if (i == 90f)
-                {
-                    card.cardPosition = CardPosition.Down;
-
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-
-            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.backNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-        else
-        {
-            for (float i = 180; i >= 0; i -= 10f)
-            {
-                transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if (i == 90f)
-                {
-                    card.cardPosition = CardPosition.Up;
-                }
-                yield return new WaitForSeconds(0.01f);
-            }
-            cardUI.cardHandle.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            cardUI.frontNumber.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-
-
-        proceedCaroutine = true;
-    }
-
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (TurnSystem.Instance.isMyTurn && !hasFlipped && isPlayerCard)
+        if (TurnSystem.Instance.isMyTurn && !cardRotation.hasFlipped && isPlayerCard)
         {
             rectTransform.anchoredPosition += (eventData.delta / cardCanvas.scaleFactor);
             transform.SetParent(cardCanvas.transform, true);
@@ -160,11 +65,13 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        newParent = Hand.transform.parent;
-        cardImageComponent.raycastTarget = false;
-        cardBackgroundComponent.raycastTarget = false;
-        cardBorderComponent.raycastTarget = false;
-        cardHandleComponent.raycastTarget = false;
+        newParent = Hand.transform;
+        //cardImageComponent.raycastTarget = false;
+        //cardBackgroundComponent.raycastTarget = false;
+        //cardBorderComponent.raycastTarget = false;
+        //cardHandleComponent.raycastTarget = false;
+        canvasGroup.blocksRaycasts = false;
+        cardRotation.isDragging = true;
 
 
         if (card.cardData.card_Ownership == CardOwnership.Player)
@@ -176,61 +83,31 @@ public class CardMovementAttemp : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnEndDrag(PointerEventData eventData)
     {
         hoveredObject = eventData.pointerEnter;
-        cardImageComponent.raycastTarget = true;
-        cardBackgroundComponent.raycastTarget = true;
-        cardBorderComponent.raycastTarget = true;
-        cardHandleComponent.raycastTarget = true;
+        //cardImageComponent.raycastTarget = true;
+        //cardBackgroundComponent.raycastTarget = true;
+        //cardBorderComponent.raycastTarget = true;
+        //cardHandleComponent.raycastTarget = true;
+        canvasGroup.blocksRaycasts = true;
+        cardRotation.isDragging = false;
 
-        if (hoveredObject.CompareTag("PlayerCardHolder") && hoveredObject != null && card.cardData.card_Ownership == CardOwnership.Player)
+        if (hoveredObject.CompareTag("PlayerCardHolder") && hoveredObject != null 
+            && card.cardData.card_Ownership == CardOwnership.Player && !cardHover.isHovering)
         {
             transform.SetParent(newParent, false);
-            
-        }
-        else if (isPlayerCard && hoveredObject != null)
-        {
-            transform.SetParent(Hand.transform, false);
-            
-        }
+            isPlayerCard = false;
 
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        isPointerOverCard = true;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        isPointerOverCard = false;
-    }
-
-    public void beginFlip()
-    {
-        if (isOverPlayArea)
-        {
-
-            if (proceedCaroutine)
+            if (audioManager != null)
             {
-                StartCoroutine(Flip());
-                hasFlipped = true;
+                audioManager.PlaySFX(audioManager.cardPutSound);
             }
+            
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("PlayArea"))
+        else if (card.cardData.card_Ownership == CardOwnership.Player)
         {
-            isOverPlayArea = true;
+            transform.SetParent(newParent, false);
+            isPlayerCard = false;
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("PlayArea"))
-        {
-            isOverPlayArea = false;
-        }
     }
 
 }

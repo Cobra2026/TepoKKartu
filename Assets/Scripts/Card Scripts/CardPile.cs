@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "cardPile")]
+[CreateAssetMenu(menuName = "Cards/Card List")]
 public class CardPile : ScriptableObject
 {
     [field:SerializeField] public List<ScriptableCard> cardsInPile {  get; private set; }
 
-    public void removeCardFromPile(ScriptableCard card)
+    public void RemoveCardFromPile(ScriptableCard card)
     {
         if(cardsInPile.Contains(card))
         {
@@ -15,11 +15,11 @@ public class CardPile : ScriptableObject
         }
         else
         {
-            Debug.Log("CardData is not in pile");
+            return;
         }
     }
 
-    public void addCardToPile(ScriptableCard card)
+    public void AddCardToPile(ScriptableCard card)
     {
         cardsInPile.Add(card);
     }
