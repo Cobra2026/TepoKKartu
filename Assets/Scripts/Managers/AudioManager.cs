@@ -22,18 +22,18 @@ public class AudioManager : MonoBehaviour
 
     private bool isUsingRegularBattle = false;
 
-    private void Awake()
-    {
-        if(Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+    // private void Awake()
+    // {
+    //     if(Instance != null && Instance != this)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    // }
 
     private void OnEnable()
     {
