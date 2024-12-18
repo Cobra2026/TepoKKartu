@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
     public int tempFrontNumber;
     public int tempBackNumber;
     public bool isBuffed = false;
+    public bool keepCard = false;
 
     private void Awake()
     {
@@ -76,5 +77,10 @@ public class Card : MonoBehaviour
         int refundedEnergy = Mathf.Clamp(storedEnergy, 0, amount);
         TurnSystem.Instance.currentEnergy += refundedEnergy;
         storedEnergy -= refundedEnergy;
+    }
+
+    public void ResetStoredEnergy()
+    {
+        storedEnergy = 0;
     }
 }

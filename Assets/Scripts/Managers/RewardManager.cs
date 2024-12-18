@@ -94,10 +94,12 @@ public class RewardManager : MonoBehaviour
                 selectedCards.Add(selectedCard);
             }
 
+            Debug.Log($"selected cards amount: {selectedCards.Count}, selected card: {selectedCard}");
+
             loopCount++;
-            if (loopCount > 10)
+            if (loopCount > 50)
             {
-                Debug.Log("Loop exceeded 10 times");
+                Debug.Log("Loop exceeded 50 times");
                 break;
             }
         }
@@ -124,8 +126,8 @@ public class RewardManager : MonoBehaviour
             Transform parent = rewardParents[i % rewardParents.Count];
             GameObject cardDisplayButton = Instantiate(buttonPrefab, parent);
 
-            CardUI cardUI = cardDisplayButton.GetComponent<CardUI>();
-            cardUI.SetCardData(rewardCards[i]);
+            Card card = cardDisplayButton.GetComponent<Card>();
+            card.SetUp(rewardCards[i]);
 
             Button button = cardDisplayButton.GetComponent<Button>();
             int cardIndex = i;

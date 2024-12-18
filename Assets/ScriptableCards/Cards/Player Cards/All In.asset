@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: All In
   m_EditorClassIdentifier: 
   <card_Name>k__BackingField: All In
-  <front_Number>k__BackingField: 14
+  <front_Number>k__BackingField: 12
   <back_Number>k__BackingField: 3
   <front_Image>k__BackingField: {fileID: -478473386618417641, guid: 5682da3d573e0a849af8a42da0b4d7de, type: 3}
   <back_Image>k__BackingField: {fileID: -478473386618417641, guid: 5682da3d573e0a849af8a42da0b4d7de, type: 3}
@@ -22,16 +22,16 @@ MonoBehaviour:
   <card_Ownership>k__BackingField: 0
   <card_Rarity>k__BackingField: 2
   card_Effect:
+  - effectType: 3
+    value: 3
+    target: 0
+    triggerTime: 1
+    triggerCondition: 0
+    duration: 0
   - effectType: 2
     value: 2
     target: 1
     triggerTime: 1
     triggerCondition: 0
     duration: 0
-  - effectType: 3
-    value: 5
-    target: 0
-    triggerTime: 1
-    triggerCondition: 0
-    duration: 0
-  <card_Description>k__BackingField: Deal 5 damage to self and gain 2x value
+  <card_Description>k__BackingField: Deal 3 damage to self and gain 2x value

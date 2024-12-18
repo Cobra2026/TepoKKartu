@@ -22,14 +22,13 @@ public class CombatManager : MonoBehaviour
     [Header("Damage Popup Component")]
     [SerializeField] private DamagePopup enemyDamagePopup;
     [SerializeField] private DamagePopup playerDamagePopup;
-    public GameObject enemyPivot;
-    public GameObject playerPivot;
-    public Vector3 enemyUIComponent;
-    public Vector3 playerUIComponent;
-    
 
     public int playerShield = 0;
     public int enemyShield = 0;
+    public int playerTotalAttack = 0;
+    public int enemyTotalAttack = 0;
+
+    public bool isTallying = false;
 
     public void OnEnable()
     {
@@ -61,29 +60,27 @@ public class CombatManager : MonoBehaviour
         playerHealth = PlayerHealth.Instance;
         enemyHealth = EnemyHealth.Instance;
         audioManager = AudioManager.Instance;
-        enemyUIComponent = enemyPivot.transform.position;
-        playerUIComponent = playerPivot.transform.position;
 
         playerHealthBar.SetMaxHealthBar(playerHealth.playerCurrentHealth, playerHealth.playerMaxHealth);
         StartCoroutine(InitializeEnemyHealth());
     }
 
-    public void CalculateDamage()
+    public void TallyNumbers()
     {
-        int playerTotalAttack = 0;
+        isTallying = true;
+
         int playerTotalDefense = 0;
-        int enemyTotalAttack = 0;
         int enemyTotalDefense = 0;
+        playerTotalAttack = 0;
+        enemyTotalAttack = 0;
 
-
-        foreach(Card card in playArea.cardsInPlayArea)
+        foreach (Card card in playArea.cardsInPlayArea)
         {
             int cardValue = 0;
 
             CardType currentType = card.CurrentCardType();
-            
 
-            if(card.cardPosition == CardPosition.Up)
+            if (card.cardPosition == CardPosition.Up)
             {
                 cardValue = card.tempFrontNumber;
             }
@@ -92,25 +89,25 @@ public class CombatManager : MonoBehaviour
                 cardValue = card.tempBackNumber;
             }
 
-            if(currentType == CardType.Attack)
+            if (currentType == CardType.Attack)
             {
-                if(card.cardData.card_Ownership == CardOwnership.Player)
+                if (card.cardData.card_Ownership == CardOwnership.Player)
                 {
                     playerTotalAttack += cardValue;
                 }
-                else if(card.cardData.card_Ownership == CardOwnership.Enemy)
+                else if (card.cardData.card_Ownership == CardOwnership.Enemy)
                 {
                     enemyTotalAttack += cardValue;
                 }
             }
 
-            else if(currentType == CardType.Defend)
+            else if (currentType == CardType.Defend)
             {
-                if(card.cardData.card_Ownership == CardOwnership.Player)
+                if (card.cardData.card_Ownership == CardOwnership.Player)
                 {
                     playerTotalDefense += cardValue;
                 }
-                else if(card.cardData.card_Ownership== CardOwnership.Enemy)
+                else if (card.cardData.card_Ownership == CardOwnership.Enemy)
                 {
                     enemyTotalDefense += cardValue;
                 }
@@ -119,6 +116,13 @@ public class CombatManager : MonoBehaviour
         playerShield = playerTotalDefense;
         enemyShield = enemyTotalDefense;
 
+        isTallying = false;
+    }
+
+    public void CalculateDamage()
+    {
+        TallyNumbers();
+
         if (playerTotalAttack > enemyTotalAttack)
         {
             DealDamageToEnemy(playerTotalAttack);
@@ -126,12 +130,14 @@ public class CombatManager : MonoBehaviour
         else if (playerTotalAttack < enemyTotalAttack)
         {
             DealDamageToPlayer(enemyTotalAttack);
-
         }
     }
 
     public void DealDamageToPlayer(int damage)
     {
+        if (playerHealth.playerCurrentHealth == 0)
+            return;
+
         if(playerShield > 0)
         {
             if(damage <= playerShield)
@@ -147,10 +153,8 @@ public class CombatManager : MonoBehaviour
         }
 
         playerHealth.PlayerTakeDamage(damage);
-
-        if(damage != 0)
-            ActivatePlayerDamageTaken(damage);
-        playerDamagePopup.CreatePopup(playerUIComponent, damage.ToString());
+        ActivatePlayerDamageTaken(damage);
+        playerDamagePopup.CreatePopup(damage.ToString());
 
         foreach (var card in playArea.cardsInPlayArea)
         {
@@ -159,8 +163,10 @@ public class CombatManager : MonoBehaviour
                 card.RevertBuff();
             }
         }
+        playerTotalAttack = 0;
 
-        if(playerHealth.playerCurrentHealth <= 0)
+
+        if (playerHealth.playerCurrentHealth <= 0)
         {
             TurnSystem.Instance.SwitchPhase(CombatPhase.PlayerLose);
         }
@@ -168,6 +174,9 @@ public class CombatManager : MonoBehaviour
 
     public void DealDamageToEnemy(int damage)
     {
+        if (enemyHealth.enemyCurrentHealth == 0)
+            return;
+
         if(enemyShield > 0)
         {
             if(damage <= enemyShield)
@@ -183,10 +192,8 @@ public class CombatManager : MonoBehaviour
         }
 
         enemyHealth.EnemyTakeDamage(damage);
-
-        if(damage !=  0)
-            ActivateEnemyDamageTaken(damage);
-        enemyDamagePopup.CreatePopup(enemyUIComponent, damage.ToString());
+        ActivateEnemyDamageTaken(damage);
+        enemyDamagePopup.CreatePopup(damage.ToString());
 
         foreach (var card in playArea.cardsInPlayArea)
         {
@@ -195,6 +202,7 @@ public class CombatManager : MonoBehaviour
                 card.RevertBuff();
             }
         }
+        enemyTotalAttack = 0;
 
         if (enemyHealth.enemyCurrentHealth <= 0)
         {
@@ -216,7 +224,7 @@ public class CombatManager : MonoBehaviour
     }
     private IEnumerator InitializeEnemyHealth()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.001f);
         enemyHealthBar.SetMaxHealthBar(enemyHealth.enemyCurrentHealth, enemyHealth.enemyMaxHealth);
 
     }
@@ -224,22 +232,38 @@ public class CombatManager : MonoBehaviour
     private void OnPlayerDamageTaken(int damage)
     {
         if (audioManager != null)
-            audioManager.PlaySFX(audioManager.damageTakenSound);
+        {
+            if (damage != 0)
+            {
+                audioManager.PlaySFX(audioManager.damageTakenSound);
+                playerComponent.ShakeObject(0.2f, 50f);
+            }
+            else
+            {
+                audioManager.PlaySFX(audioManager.zeroDamageSound);
+            }
+        }
 
         playerHealthBar.SetHealthBar(playerHealth.playerCurrentHealth);
-        playerComponent.ShakeObject(0.2f, 50f);
-        
 
     }
 
     private void OnEnemyDamageTaken(int damage)
     {
         if (audioManager != null)
-            audioManager.PlaySFX(audioManager.damageTakenSound);
+        {
+            if (damage != 0)
+            {
+                audioManager.PlaySFX(audioManager.damageTakenSound);
+                enemyComponent.ShakeObject(0.2f, 50f);
+            }
+            else
+            {
+                audioManager.PlaySFX(audioManager.zeroDamageSound);
+            }
+        }
 
-        enemyHealthBar.SetHealthBar(enemyHealth.enemyCurrentHealth);
-        enemyComponent.ShakeObject(0.2f, 50f);
-        
+        enemyHealthBar.SetHealthBar(enemyHealth.enemyCurrentHealth);  
     }
 
     private void ActivatePlayerDamageTaken(int damage)

@@ -17,23 +17,24 @@ public class AudioManager : MonoBehaviour
     public AudioClip cardFlipSound;
     public AudioClip cardPutSound;
     public AudioClip damageTakenSound;
+    public AudioClip zeroDamageSound;
 
     public static AudioManager Instance;
 
-    private bool isUsingRegularBattle = false;
+    private bool isPlayingBattleMusic = false;
 
-    // private void Awake()
-    // {
-    //     if(Instance != null && Instance != this)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    //     else
-    //     {
-    //         Instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    // }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void OnEnable()
     {
@@ -63,33 +64,16 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = menuMusic;
             musicSource.Play();
+            isPlayingBattleMusic = false;
         }
-        else if(currentScene == "Post-Game Scene")
+        else
         {
-            if (isUsingRegularBattle)
+            if (isPlayingBattleMusic)
                 return;
 
-            musicSource.clip = battleMusic2;
+            musicSource.clip = battleMusic1;
             musicSource.Play();
-            isUsingRegularBattle = true;
-        }
-        else if(currentScene == "CombatScene")
-        {
-            if(DataPersistenceManager.instance.gameData.encounterCount == 4)
-            {
-                musicSource.clip = battleMusic1;
-                musicSource.Play();
-                isUsingRegularBattle = false;
-            }
-            else
-            {
-                if (isUsingRegularBattle)
-                    return;
-
-                musicSource.clip = battleMusic1;
-                musicSource.Play();
-                isUsingRegularBattle = true;
-            }
+            isPlayingBattleMusic = true;
         }
     }
 

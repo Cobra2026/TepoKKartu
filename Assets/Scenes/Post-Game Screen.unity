@@ -605,6 +605,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: data.json
+  gameData:
+    playerCurrentHealth: 50
+    globalDeck: []
+    isStarterDeckInitialized: 0
+    encounterCount: 0
+    isFirstEncounter: 1
+    loopCount: 0
+    resolutionWidth: 1920
+    resolutionHeight: 1080
 --- !u!114 &92950345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5025,6 +5034,8 @@ MonoBehaviour:
     elf shouted, before returning to the bag. You feel as if your body is revitalized...
     somehow. (10 health restored.)
   - Something inside you changed.
+  - Something inside you changed. (10 health restored!)
+  - Something inside you changed. (took 10 damage!)
   textSpeed: 0.000001
   index: 0
 --- !u!1 &1576448682
@@ -7198,7 +7209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDeck: {fileID: 1421907894}
-  startEncounterDraw: 2
   starterDeck: {fileID: 11400000, guid: cd0593b5dc141e64b9772f5f4c38ca6a, type: 2}
   tempDeck: {fileID: 11400000, guid: ef1e4e1bd21d3d347a26ce088e60ac37, type: 2}
   globalDeck: []

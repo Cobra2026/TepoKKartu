@@ -20,7 +20,6 @@ public class DialogueController : MonoBehaviour
     public void OHMYGODPLEASEWORK()
     {
         Dialogue.instance.index = indexNumber;
-        // Dialogue.instance.textComponent.text = string.Empty;
         Dialogue.instance.StartCoroutine(Dialogue.instance.TypeLine());
     }
 

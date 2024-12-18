@@ -8,10 +8,12 @@ public class EventSystem : MonoBehaviour
     private int playerHalfHealth;
     private int randomID;
     private bool isOnCooldown = false;
+    private Dialogue dialogue;
     public float cooldownTime = 2f;
 
     void Awake()
     {
+        dialogue = Dialogue.instance;
         playerHealth = GetComponent<PlayerHealth>();
     }
 
@@ -42,15 +44,21 @@ public class EventSystem : MonoBehaviour
         switch (randomID)
         {
             case 1:
-            Debug.Log("10 health Restored.");
-            playerHealth.PlayerRegenHealth(10);
-            break;
+                //dialogue.index = 4;
+                //dialogue.StartDialogue();
+                Debug.Log("10 health Restored.");
+                playerHealth.PlayerRegenHealth(10);
+                break;
             case 2:
-            Debug.Log("pick 2 cards out of 4");
-            break;
+                //dialogue.index = 3;
+                //dialogue.StartDialogue();
+                Debug.Log("pick 2 cards out of 4");
+                break;
             case 3:
-            Debug.Log("-10 health!");
-            playerHealth.PlayerTakeDamage(10);
+                //dialogue.index = 2;
+                //dialogue.StartDialogue();
+                Debug.Log("-10 health!");
+                playerHealth.PlayerTakeDamage(10);
             break;
         }
     }

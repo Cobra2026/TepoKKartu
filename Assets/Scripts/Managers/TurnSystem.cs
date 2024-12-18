@@ -11,7 +11,9 @@ public class TurnSystem : MonoBehaviour
 
     public bool isMyTurn;
     public bool turnStart = false;
-    public bool isTurnEndButtonPressed = false;
+    private bool isTurnEndButtonPressed = false;
+    private bool isCardKeepButtonPressed = false;
+    private EnemyScalingManager enemyScaling;
 
     public int maxEnergy = 3;
     public int currentEnergy;
@@ -20,13 +22,15 @@ public class TurnSystem : MonoBehaviour
 
     public Deck playerDeck;
     public Deck enemyDeck;
-    public TextMeshProUGUI playerDeckCountText;
-    public TextMeshProUGUI playerDiscardCountText;
-
     public TextMeshProUGUI energyText;
+
     public PlayAreaManager playArea;
     public CombatManager combatManager;
+    public KeepAreaManager keepArea;
+    public GameObject keepPanel;
+    public Canvas winCanvas;
 
+    public List<Card> cardsToKeep = new List<Card>();
     private List<(CardEffect effect, Card currentCard, List<Card> cardList, int turnAmount)> scheduledEffects =
         new List<(CardEffect effect, Card currentCard, List<Card> cardList, int turnAmount)>();
 
@@ -40,20 +44,18 @@ public class TurnSystem : MonoBehaviour
         {
             Instance = this;
         }
+        enemyScaling = EnemyScalingManager.Instance;
     }
 
     private void Start()
     {
         combatManager = CombatManager.Instance;
-        
     }
 
     private void Update()
     {
         //texts
         energyText.text = currentEnergy + "/" + startEnergy;
-        playerDeckCountText.text = playerDeck.deckPile.Count.ToString();
-        playerDiscardCountText.text = playerDeck.discardPile.Count.ToString();
     }
 
     public void SwitchPhase(CombatPhase newPhase)
@@ -77,6 +79,9 @@ public class TurnSystem : MonoBehaviour
             case CombatPhase.CombatStart:
                 CombatStartPhase();
                 break;
+            case CombatPhase.CardKeep:
+                ResetKeptCards();
+                break;
         }
     }
 
@@ -85,6 +90,7 @@ public class TurnSystem : MonoBehaviour
         isMyTurn = true;
         startEnergy = maxEnergy;
         currentEnergy = startEnergy;
+        enemyScaling.hasScaled = false;
     }
 
     public void TurnEndPhase()
@@ -93,21 +99,7 @@ public class TurnSystem : MonoBehaviour
         {
             playArea.PlayEnemyCards();
         }
-
-        if (playArea.hasPlayed)
-        {
-            Debug.Log("Play cards routine has activated before playing all cards");
-        }
-
         playArea.PlayAllCards();
-
-        if (playArea.hasPlayed)
-        {
-            Debug.Log("Play cards routine has activated after playing all cards");
-        }
-
-        Debug.Log($"Play cards routine has activated, with {playArea.hasPlayed} and {playArea.cardsInPlayArea.Count}");
-
         isMyTurn = false;
         StartCoroutine(SimulateEndTurn(1f));
     }
@@ -117,6 +109,7 @@ public class TurnSystem : MonoBehaviour
         isMyTurn = true;
         turnStart = true;
         isTurnEndButtonPressed = false;
+        isCardKeepButtonPressed = false;
 
         currentEnergy = startEnergy;
         turnCount += 1;
@@ -127,12 +120,25 @@ public class TurnSystem : MonoBehaviour
         enemyDeck.TurnStartDraw();
 
         ExecuteScheduledEffect();
+        foreach (Card card in playerDeck.handPile)
+        {
+            card.ResetStoredEnergy();
+            card.keepCard = false;
+        }
     }
 
     public void PlayerWinPhase()
     {
         PlayerDeckManager.Instance.PlayerEndEncounter();
-        RewardManager.Instance.ShowRewardScreen();
+        if (EncounterManager.Instance.encounterCount == 5)
+        {
+            winCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            RewardManager.Instance.ShowRewardScreen();
+        }
+        Debug.Log($"encounter count: {EncounterManager.Instance.encounterCount}");
     }
 
     public void PlayerLosePhase()
@@ -142,26 +148,41 @@ public class TurnSystem : MonoBehaviour
 
     public void EndTurnButton()
     {
+        keepArea.ReturnCardsToHand();
+
         if (!isTurnEndButtonPressed)
         {
             SwitchPhase(CombatPhase.TurnEnd);
             isTurnEndButtonPressed = true;
         }
     }
-    
-    private IEnumerator HandleAutoplay()
-    {
-        if (!playArea.enemyHasEntered)
-        {
-            playArea.PlayEnemyCards();
-        }
 
-        if (!playArea.hasPlayed)
+    public void CardKeepButton()
+    {
+        if (!isCardKeepButtonPressed)
         {
-            playArea.PlayAllCards();
-            Debug.Log("Play cards routine has activated");
+
+            if (playerDeck.handPile.Count <= 4)
+            {
+                foreach (Card card in playerDeck.handPile)
+                {
+                    card.keepCard = true;
+                }
+                SwitchPhase(CombatPhase.TurnEnd);
+            }
+            else
+            {
+                SwitchPhase(CombatPhase.CardKeep);
+                GameObject.FindGameObjectWithTag("CardCanvas").SetActive(false);
+                keepPanel.SetActive(true);
+            }
+            isCardKeepButtonPressed = true;
         }
-        yield return new WaitForSeconds(0.01f);
+    }
+
+    public void ResetKeptCards()
+    {
+        cardsToKeep.Clear();
     }
 
     private IEnumerator EndTurnDiscard()
@@ -184,6 +205,7 @@ public class TurnSystem : MonoBehaviour
                 yield return StartCoroutine(enemyDeck.Discard(card));
             }
         }
+        StartCoroutine(playerDeck.DiscardHard());
         playArea.cardsInPlayArea.Clear();
         playArea.playerCardsInPlay.Clear();
     }
@@ -216,7 +238,13 @@ public class TurnSystem : MonoBehaviour
 
     private void ActivateAllCards()
     { 
-        foreach(var card in playArea.cardsInPlayArea)
+        List<Card> cardsToActivate = new List<Card>();
+
+        foreach(Card card in playArea.cardsInPlayArea)
+        {
+            cardsToActivate.Add(card);
+        }
+        foreach(Card card in cardsToActivate)
         {
             card.PlayCard(playArea.cardsInPlayArea);
         }
@@ -227,8 +255,9 @@ public class TurnSystem : MonoBehaviour
         ActivateAllCards();
         yield return new WaitForSeconds(time);
         combatManager.CalculateDamage();
-        StartCoroutine(EndTurnDiscard());
-        yield return new WaitForSeconds(time);
+        //StartCoroutine(EndTurnDiscard());
+        //yield return new WaitForSeconds(time);
+        yield return StartCoroutine(EndTurnDiscard());
         SwitchPhase(CombatPhase.TurnStart);
     }
 }

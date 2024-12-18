@@ -286,7 +286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 8}
+  m_AnchoredPosition: {x: -64, y: 87}
   m_SizeDelta: {x: 21, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6424173595013384776
@@ -959,6 +959,9 @@ GameObject:
   - component: {fileID: 2652409002730406908}
   - component: {fileID: 5591645324718434604}
   - component: {fileID: 6106212309659935350}
+  - component: {fileID: -6576819063684096434}
+  - component: {fileID: 7555747872459906768}
+  - component: {fileID: 4029589899812428300}
   m_Layer: 5
   m_Name: CardDisplayButton
   m_TagString: Untagged
@@ -1099,6 +1102,57 @@ MonoBehaviour:
   commonDefendBackground: {fileID: 5325639082435987260, guid: 1ac8ce66d75cc4544ab361d3a900f24d, type: 3}
   uncommonDefendBackground: {fileID: -7377784533752186142, guid: fda0a5d54f9a3cc4e973ffb0414ae3f0, type: 3}
   rareDefendBackground: {fileID: 6563036736076743355, guid: 7d4fd40401de20449aead9519165cca9, type: 3}
+--- !u!114 &-6576819063684096434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189491756575020906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a1ff02fab562db4093a8493a59e3ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <cardData>k__BackingField: {fileID: 0}
+  cardPosition: 0
+  storedEnergy: 0
+  cardRotation: {fileID: 0}
+  tempFrontNumber: 0
+  tempBackNumber: 0
+  isBuffed: 0
+  keepCard: 0
+--- !u!114 &7555747872459906768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189491756575020906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eee028b7262b5b45a842ece22269d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPointerOverCard: 0
+  isHovering: 0
+  isNotCardDisplay: 0
+--- !u!114 &4029589899812428300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189491756575020906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8a241ec3ca1344fb660d35eabce6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCard: {fileID: 0}
+  hasFlipped: 0
+  isOverPlayArea: 0
+  isDragging: 0
 --- !u!1 &6441147289748932316
 GameObject:
   m_ObjectHideFlags: 0

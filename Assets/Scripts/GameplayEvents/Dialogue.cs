@@ -12,7 +12,6 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
 
     public int index = 1;
-    // private int lastIndex = -1;
 
     public void Awake()
     {
@@ -32,25 +31,8 @@ public class Dialogue : MonoBehaviour
         StartDialogue();
     }
 
-    // void Update()
-    // {
-    //     if (Input.GetMouseButtonDown(0))
-    //     {
-    //         if (textComponent.text == lines[index])
-    //         {
-    //             NextLine();
-    //         }
-    //         else
-    //         {
-    //             StopAllCoroutines();
-    //             textComponent.text = lines[index];
-    //         }
-    //     }
-    // }
-
-    void StartDialogue()
+    public void StartDialogue()
     {
-        // index = GetRandomLineIndex();
         StartCoroutine(TypeLine());
     }
 
@@ -69,33 +51,4 @@ public class Dialogue : MonoBehaviour
         }
         isTyping = false;
     }
-
-    // public void NextLine()
-    // {
-    //     if (textComponent.text == lines[index])
-    //     {
-    //        index = GetRandomLineIndex();
-
-    //         textComponent.text = string.Empty;
-    //         StartCoroutine(TypeLine());
-    //     }
-    //     else
-    //     {
-    //         StopAllCoroutines();
-    //         textComponent.text = lines[index];
-    //     }
-    // }
-
-    // int GetRandomLineIndex()
-    // {
-    //     int randomIndex;
-
-    //     do
-    //     {
-    //         randomIndex = Random.Range(0, lines.Length);
-    //     } while (randomIndex == lastIndex);
-
-    //     lastIndex = randomIndex;
-    //     return randomIndex;
-    // }
 }
