@@ -8,16 +8,24 @@ public class CardSlot : MonoBehaviour, IDropHandler
 {
     private TurnSystem turnSystem;
     private PlayAreaManager playArea;
+    private CombatManager combatManager;
 
     private void Start()
     {
         turnSystem = TurnSystem.Instance;
         playArea = PlayAreaManager.Instance;
+        combatManager = CombatManager.Instance;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
         GameObject droppedItem = eventData.pointerDrag;
+        StartCoroutine(CheckCardsInPlay(droppedItem));
+
+    }
+
+    private IEnumerator CheckCardsInPlay(GameObject droppedItem)
+    {
         Card droppedCard = droppedItem.GetComponent<Card>();
         CardMovementAttemp cardMovement = droppedItem.GetComponent<CardMovementAttemp>();
         CardRotation cardRotation = droppedItem.GetComponent<CardRotation>();
@@ -37,10 +45,13 @@ public class CardSlot : MonoBehaviour, IDropHandler
         }
         else if (playArea.playerCardsInPlay.Count > 1 && turnSystem.currentEnergy < 2 || playArea.hasPlayed)
         {
-            return;
+            yield return null;
         }
 
+        
+        yield return null;
         playArea.CheckCardsInPlayArea();
+        combatManager.TallyNumbers();
     }
 
 }

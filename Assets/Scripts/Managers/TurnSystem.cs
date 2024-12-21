@@ -255,8 +255,15 @@ public class TurnSystem : MonoBehaviour
         ActivateAllCards();
         yield return new WaitForSeconds(time);
         combatManager.CalculateDamage();
-        //StartCoroutine(EndTurnDiscard());
-        //yield return new WaitForSeconds(time);
+
+        foreach (var card in playArea.cardsInPlayArea)
+        {
+            if (card.isBuffed)
+            {
+                card.RevertBuff();
+            }
+        }
+
         yield return StartCoroutine(EndTurnDiscard());
         SwitchPhase(CombatPhase.TurnStart);
     }

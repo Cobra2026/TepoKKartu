@@ -11,6 +11,7 @@ public class CardClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Card currentCard;
     private GameObject hand;
     private GameObject keepArea;
+    private AudioManager audioManager;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class CardClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         turn = TurnSystem.Instance;
         keepArea = GameObject.FindGameObjectWithTag("KeepArea");
         hand = GameObject.FindGameObjectWithTag("Hand");
+        audioManager = AudioManager.Instance;
 
     }
 
@@ -48,6 +50,11 @@ public class CardClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             currentCard.transform.SetParent(keepArea.transform, false);
             currentCard.keepCard = true;
             turn.cardsToKeep.Add(currentCard);
+
+            if(audioManager != null)
+            {
+                audioManager.PlaySFX(audioManager.cardPutSound);
+            }
         }
     }
 

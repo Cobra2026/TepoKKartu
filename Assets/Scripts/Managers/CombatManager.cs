@@ -155,19 +155,19 @@ public class CombatManager : MonoBehaviour
         playerHealth.PlayerTakeDamage(damage);
         ActivatePlayerDamageTaken(damage);
         playerDamagePopup.CreatePopup(damage.ToString());
-
-        foreach (var card in playArea.cardsInPlayArea)
-        {
-            if (card.isBuffed)
-            {
-                card.RevertBuff();
-            }
-        }
         playerTotalAttack = 0;
 
 
         if (playerHealth.playerCurrentHealth <= 0)
         {
+            foreach (var card in playArea.cardsInPlayArea)
+            {
+                if (card.isBuffed)
+                {
+                    card.RevertBuff();
+                }
+            }
+
             TurnSystem.Instance.SwitchPhase(CombatPhase.PlayerLose);
         }
     }
@@ -194,18 +194,18 @@ public class CombatManager : MonoBehaviour
         enemyHealth.EnemyTakeDamage(damage);
         ActivateEnemyDamageTaken(damage);
         enemyDamagePopup.CreatePopup(damage.ToString());
-
-        foreach (var card in playArea.cardsInPlayArea)
-        {
-            if (card.isBuffed)
-            {
-                card.RevertBuff();
-            }
-        }
         enemyTotalAttack = 0;
 
         if (enemyHealth.enemyCurrentHealth <= 0)
         {
+            foreach (var card in playArea.cardsInPlayArea)
+            {
+                if (card.isBuffed)
+                {
+                    card.RevertBuff();
+                }
+            }
+
             TurnSystem.Instance.SwitchPhase(CombatPhase.PlayerWin);
         }
     }

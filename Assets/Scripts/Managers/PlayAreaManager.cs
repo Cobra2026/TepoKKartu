@@ -11,6 +11,8 @@ public class PlayAreaManager : MonoBehaviour
 
     [SerializeField] private GameObject flipButton;
     [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject attackTally;
+    [SerializeField] private GameObject defenseTally;
 
     public List<Card> cardsInPlayArea = new List<Card>();
     public List<Card> playerCardsInPlay = new List<Card>();
@@ -18,6 +20,7 @@ public class PlayAreaManager : MonoBehaviour
     private TurnSystem turn;
     private Deck enemyDeck;
     private CombatManager combatManager;
+    private TallyController tallyController;
 
     public bool hasPlayed = false;
     public bool enemyHasEntered = false;
@@ -44,6 +47,7 @@ public class PlayAreaManager : MonoBehaviour
         turn = TurnSystem.Instance;
         combatManager = CombatManager.Instance;
         enemyDeck = TurnSystem.Instance.enemyDeck.GetComponent<Deck>();
+        tallyController = TallyController.Instance;
 
         //play button
         playButton.SetActive(false);
@@ -68,6 +72,21 @@ public class PlayAreaManager : MonoBehaviour
         {
             flipButton.SetActive(false);
         }
+
+        if (tallyController != null)
+        {
+            if (tallyController.isTallyActivated)
+            {
+                attackTally.SetActive(true);
+                defenseTally.SetActive(true);
+            }
+            else
+            {
+                attackTally.SetActive(false);
+                defenseTally.SetActive(false);
+            }
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,7 +100,7 @@ public class PlayAreaManager : MonoBehaviour
                 if (!card.cardRotation.hasFlipped)
                 {
 
-                    if (card.cardData.card_Ownership == CardOwnership.Player && turn.currentEnergy >= 2)
+                    if (card.cardData.card_Ownership == CardOwnership.Player)
                     {
                         playerCardsInPlay.Add(card);
                     }
@@ -93,7 +112,7 @@ public class PlayAreaManager : MonoBehaviour
             }
 
 
-            if (cardsInPlayArea.Count >= 1 && !hasPlayed)
+            if (cardsInPlayArea.Count >= 1 && !hasPlayed || playerCardsInPlay.Count >= 1 && !hasPlayed)
             {
                 playButton.SetActive(true);
             }
@@ -120,6 +139,7 @@ public class PlayAreaManager : MonoBehaviour
             }
 
             CheckCardsInPlayArea();
+            combatManager.TallyNumbers();
 
             if (cardsInPlayArea.Count == 0)
             {
@@ -135,8 +155,6 @@ public class PlayAreaManager : MonoBehaviour
         Card[] enemyCards = enemyCardHolder.GetComponentsInChildren<Card>();
         cardsInPlayArea.AddRange(playerCards);
         cardsInPlayArea.AddRange(enemyCards);
-
-        Debug.Log($"Cards in play area: {cardsInPlayArea.Count}");
     }
 
     private void FlipAllCards()
